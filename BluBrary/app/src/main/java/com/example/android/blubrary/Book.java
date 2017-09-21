@@ -15,7 +15,7 @@ public class Book {
     private int daysUntilDue;
     private String title;
     private String author;
-    private String genre;
+    private String[] genre;
     private String pictureFile; // wherever the picture is in the local filesystem
     private int shelfNumber;
 
@@ -25,7 +25,7 @@ public class Book {
         this.daysUntilDue = Integer.parseInt(dud);
         this.title = t;
         this.author = a;
-        this.genre = g;
+        this.genre = g.split("/");
         this.pictureFile = pf;
         this.shelfNumber = Integer.parseInt(sn);
     }
@@ -38,7 +38,15 @@ public class Book {
         Scanner counter=null;
         Scanner reader=null;
         String[] allLines;
-        String thisAsLine = this.callNumber + "#" + this.daysUntilDue + "#" + this.title + "#" + this.author + "#" + this.genre + "#" + this.pictureFile + "#" + this.shelfNumber;
+        String concatGenres = "";
+        for (int i=0; i<this.genre.length; i++) {
+            if (i == this.genre.length - 1) {
+                concatGenres+=this.genre[i];
+            } else {
+                concatGenres+=this.genre[i]+"/";
+            }
+        }
+        String thisAsLine = this.callNumber + "#" + this.daysUntilDue + "#" + this.title + "#" + this.author + "#" + concatGenres + "#" + this.pictureFile + "#" + this.shelfNumber;
         boolean exists = false; // if book already exists, there is no need to append to the file
         saveFile = new java.io.File("BookData.txt");
         counter = new Scanner(saveFile);
@@ -102,7 +110,7 @@ public class Book {
     public String getAuthor() {
         return this.author;
     }
-    public String getGenre() {
+    public String[] getGenres() {
         return this.genre;
     }
     public String getCallNumber() {
