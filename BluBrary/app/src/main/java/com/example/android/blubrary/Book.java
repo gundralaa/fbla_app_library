@@ -1,5 +1,4 @@
 package com.example.android.blubrary;
-import android.provider.MediaStore;
 
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 public class Book {
     // 14 character call number
     private String callNumber;
-    private boolean checkedOut;
+    private int daysUntilDue;
     private String title;
     private String author;
     private String genre;
@@ -21,13 +20,9 @@ public class Book {
     private int shelfNumber;
 
     // c and sn are a boolean and int, respectively
-    public Book(String cn, String c, String t, String a, String g, String pf, String sn) {
+    public Book(String cn, String dud, String t, String a, String g, String pf, String sn) {
         this.callNumber = cn;
-        if (c.equals("true")) {
-            this.checkedOut = true;
-        } else {
-            this.checkedOut = false;
-        }
+        this.daysUntilDue = Integer.parseInt(dud);
         this.title = t;
         this.author = a;
         this.genre = g;
@@ -43,7 +38,7 @@ public class Book {
         Scanner counter=null;
         Scanner reader=null;
         String[] allLines;
-        String thisAsLine = this.callNumber + "#" + this.checkedOut + "#" + this.title + "#" + this.author + "#" + this.genre + "#" + this.pictureFile + "#" + this.shelfNumber;
+        String thisAsLine = this.callNumber + "#" + this.daysUntilDue + "#" + this.title + "#" + this.author + "#" + this.genre + "#" + this.pictureFile + "#" + this.shelfNumber;
         boolean exists = false; // if book already exists, there is no need to append to the file
         saveFile = new java.io.File("BookData.txt");
         counter = new Scanner(saveFile);
@@ -87,10 +82,18 @@ public class Book {
         writer.close();
     }
     public boolean isCheckedOut() {
-        return this.checkedOut;
+        if (this.daysUntilDue != 999) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public void setCheckedOut(boolean x) throws Exception {
-        this.checkedOut = x;
+        if (x) {
+            this.daysUntilDue = 20;
+        } else {
+            this.daysUntilDue = 999;
+        }
         this.saveBook();
     }
     public String getTitle() {
