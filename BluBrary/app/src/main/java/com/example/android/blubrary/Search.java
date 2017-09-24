@@ -1,4 +1,4 @@
- 
+package com.example.android.blubrary;
 //probably missing package statements or something -Tom
 //import com.sun.istack.internal.FinalArrayList;
 
@@ -28,7 +28,7 @@ public class Search {
         searched_title = searched_title.toUpperCase();
         ArrayList<Book> tempReturn = new ArrayList<>();
         for (Book aLibrary : library) {
-            if (aLibrary.getTitle.toUpperCase().contains(searched_title) && aLibrary.getAuthor().toUpperCase().contains(searched_author)) {
+            if (aLibrary.getTitle().toUpperCase().contains(searched_title) && aLibrary.getAuthor().toUpperCase().contains(searched_author)) {
                 tempReturn.add(aLibrary);
             }
         }
