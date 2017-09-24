@@ -1,7 +1,7 @@
 package com.example.android.blubrary;
 
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 /**
@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Book class with attributes
  */
 
-public class Book {
+class Book {
     // 14 character call number
     private String callNumber;
     private int daysUntilDue;
@@ -20,7 +20,7 @@ public class Book {
     private int shelfNumber;
 
     // c and sn are a boolean and int, respectively
-    public Book(String cn, String dud, String t, String a, String g, String pf, String sn) {
+    Book(String cn, String dud, String t, String a, String g, String pf, String sn) {
         this.callNumber = cn;
         this.daysUntilDue = Integer.parseInt(dud);
         this.title = t;
@@ -32,7 +32,7 @@ public class Book {
 
     // should be called when first adding a book, or when updating the book
     // will overwrite any previous version of the book
-    public void saveBook() throws Exception {
+    private void saveBook() throws Exception {
         java.io.File saveFile=null;
         BufferedWriter writer=null;
         Scanner counter=null;
@@ -90,11 +90,7 @@ public class Book {
         writer.close();
     }
     public boolean isCheckedOut() {
-        if (this.daysUntilDue != 999) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.daysUntilDue != 999;
     }
     public void setCheckedOut(boolean x) throws Exception {
         if (x) {
@@ -107,7 +103,8 @@ public class Book {
     public String getTitle() {
         return this.title;
     }
-    public String getAuthor() {
+
+    String getAuthor() {
         return this.author;
     }
     public String[] getGenres() {

@@ -23,6 +23,7 @@ public class Search {
                 Log.d("all goodo", "found a hit");
             }
         }
+
         Book returnMe[] = new Book[tempReturn.size()];
         for (int i = 0; i < tempReturn.size(); i++) {
             Log.d("all goodo", "array crunching");
@@ -44,8 +45,10 @@ public class Search {
         return tempReturn;
     }
 
-    public static ArrayList<Book> search(Book[] library, String searched_title, String searched_author, String searched_genre) {
+    public static Book[] search(Book[] library, String searched_title, String searched_author, String searched_genre) {
+        Log.d("all goodo", "hrlp");
         ArrayList<Book> tempReturn = new ArrayList<>();
+        Log.d("all goodo", "strating meth");
         searched_author = searched_author.toUpperCase();
         searched_title = searched_title.toUpperCase();
         searched_genre = searched_genre.toUpperCase();
@@ -62,7 +65,14 @@ public class Search {
             }
             i1++;
         }
-        return tempReturn;
+        Book returnMe[] = new Book[tempReturn.size()];
+        for (int i = 0; i < tempReturn.size(); i++) {
+            Log.d("all goodo", "array crunching");
+            returnMe[i] = tempReturn.get(i);
+
+        }
+        return returnMe;
+
     }
 
     public static ArrayList<Book> search(Book[] library, String searched_title, String searched_author, String searched_genre, boolean avaible) {

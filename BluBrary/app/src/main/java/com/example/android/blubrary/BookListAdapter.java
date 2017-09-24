@@ -1,6 +1,7 @@
 package com.example.android.blubrary;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
     Book library[];
+
     public BookListAdapter(Book inLib[]) {
         library = inLib;
     }
@@ -32,8 +34,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
             holder.mBookTitle.setText(library[position].getTitle());
-            if (library[position].isCheckedOut()) holder.mBookAva.setText("Unavailable");
-            else holder.mBookAva.setText("Available");
+            if (library[position].isCheckedOut()) {
+                holder.mBookAva.setText("Unavailable");
+                holder.mBookAva.setTextColor(Color.RED);
+            } else {
+                holder.mBookAva.setText("Available");
+                holder.mBookAva.setTextColor(Color.GREEN);
+            }
 
         }
     }
@@ -42,11 +49,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public int getItemCount() {
         if (null == library) return 0;
         return library.length;
-    }
-
-    public void writeToArray() {
-        Book book1 = new Book("12534dda", "99", "The Scarlet Letter", "Nathanial Hawthorne", ("nonfiction"), "lol", "9");
-        library[0] = book1;
     }
 
     class BookListViewHolder extends RecyclerView.ViewHolder {
