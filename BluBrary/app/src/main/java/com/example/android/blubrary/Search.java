@@ -4,6 +4,8 @@ package com.example.android.blubrary;
 
 //import java.awt.print.Book;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -11,16 +13,23 @@ import java.util.ArrayList;
  * made with love
  */
 public class Search {
-    public static ArrayList<Book> search(Book[] library, String searched_title) {
+    public static Book[] search(Book[] library, String searched_title) {
         ArrayList<Book> tempReturn = new ArrayList<>();
         searched_title = searched_title.toUpperCase();
 
         for (Book aLibrary : library) {
             if (aLibrary.getTitle().toUpperCase().contains(searched_title)) {
                 tempReturn.add(aLibrary);
+                Log.d("all goodo", "found a hit");
             }
         }
-        return tempReturn;
+        Book returnMe[] = new Book[tempReturn.size()];
+        for (int i = 0; i < tempReturn.size(); i++) {
+            Log.d("all goodo", "array crunching");
+            returnMe[i] = tempReturn.get(i);
+
+        }
+        return returnMe;
     }
 
     public static ArrayList<Book> search(Book[] library, String searched_title, String searched_author) {
