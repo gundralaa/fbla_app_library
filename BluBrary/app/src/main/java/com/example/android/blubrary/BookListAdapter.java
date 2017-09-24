@@ -12,6 +12,7 @@ import android.widget.TextView;
  */
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
+
     Book b1 = new Book("1", "999", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
     Book b2 = new Book("1", "999", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
     Book b3 = new Book("1", "999", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
@@ -26,7 +27,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     Book b12 = new Book("1", "999", "AP Chemistry", "Priceton Review", "AP/Chemistry", "", "1");
     Book b13 = new Book("1", "999", "AP U.S. History: Premium Edition", "Priceton Review", "History/US History/Nonfiction/AP", "", "1");
     Book b14 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
-    Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14};
+    Book b15 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book b16 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book b17 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book b18 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book b19 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book b20 = new Book("1", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14,b15,b16,b17,b18,b19,b20};
 
     public BookListAdapter() {
 
