@@ -1,44 +1,51 @@
 package com.example.android.blubrary;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Book b1 = new Book("1", "99", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
+    Book b2 = new Book("1", "999", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
+    Book b3 = new Book("1", "999", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
+    Book b4 = new Book("1", "99", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
+    Book b5 = new Book("1", "999", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
+    Book b6 = new Book("1", "999", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
+    Book b7 = new Book("1", "99", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
+    Book b8 = new Book("1", "999", "The American Pageant", "David Kennedy", "History/US History/Nonfiction/Textbook", "", "1");
+    Book b9 = new Book("1", "99", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
+    Book b10 = new Book("1", "999", "Android Programming: The Big Nerd Ranch", "Phillip Marsicano", "Java/Android/App Development", "", "1");
+    Book b11 = new Book("1", "99", "AP Economics Macro & Micro", "Priceton Review", "AP/Economics", "", "1");
+    Book b12 = new Book("1", "99", "AP Chemistry", "Priceton Review", "AP/Chemistry", "", "1");
+    Book b13 = new Book("1", "999", "AP U.S. History: Premium Edition", "Priceton Review", "History/US History/Nonfiction/AP", "", "1");
+    Book b14 = new Book("1", "99", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14};
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
+    private Button searchButton;
+    private EditText textIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -51,10 +58,20 @@ public class MainActivity extends AppCompatActivity
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         mRecyclerView.setLayoutManager(layoutManager);
-
-        mBookListAdapter = new BookListAdapter();
+        textIn = (EditText) findViewById(R.id.intxt);
+        mBookListAdapter = new BookListAdapter(library);
 
         mRecyclerView.setAdapter(mBookListAdapter);
+        searchButton = (Button) findViewById(R.id.searchB);
+        searchButton.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("all goodo", "button.press");
+                mBookListAdapter = new BookListAdapter(( Search.search(library, textIn.getText().toString())));
+                Log.d("all goodo", "button.press passed");
+                mRecyclerView.setAdapter(mBookListAdapter);
+                Log.d("all goodo", "reset adapter");
+            }
+        }));
     }
 
     @Override

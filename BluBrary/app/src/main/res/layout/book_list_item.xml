@@ -12,13 +12,22 @@
             android:id="@+id/tv_book_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|start" />
+            android:layout_gravity="center_vertical|start"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end" />
+
+            android:layout_gravity="center_vertical|end"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/tv_book_ava"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
 
     </LinearLayout>
 
