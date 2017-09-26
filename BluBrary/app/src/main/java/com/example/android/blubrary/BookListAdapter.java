@@ -15,7 +15,14 @@ import android.widget.TextView;
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
     Book library[];
 
-    public BookListAdapter(Book inLib[]) {
+    private final BookListAdapterClickHandler mClickHandler;
+
+    public interface BookListAdapterClickHandler {
+        void onClick(int position);
+    }
+
+    public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler) {
+        mClickHandler = clickHandler;
         library = inLib;
     }
 
@@ -51,7 +58,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         return library.length;
     }
 
-    class BookListViewHolder extends RecyclerView.ViewHolder {
+    class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView mBookTitle;
         public final TextView mAuthorName;
@@ -62,7 +69,14 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             mBookTitle = (TextView) view.findViewById(R.id.tv_book_name);
             mBookAva = (TextView) view.findViewById(R.id.tv_book_ava);
             mAuthorName = (TextView) view.findViewById(R.id.tv_book_author);
+
+            view.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mClickHandler.onClick(adapterPosition);
+        }
     }
 }
