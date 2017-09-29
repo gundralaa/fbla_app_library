@@ -17,32 +17,36 @@
 
             <EditText
                 android:id="@+id/intxt"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Title"
+                android:layout_gravity="end"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/inauth"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Author"
+                android:layout_gravity="end"
                 android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/ingenre"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Genre"
+                android:layout_gravity="end"
                 android:inputType="textPersonName" />
 
             <Button
                 android:id="@+id/searchB"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:text="@string/search" />
 
         </LinearLayout>
