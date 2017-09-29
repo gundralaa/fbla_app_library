@@ -16,7 +16,9 @@
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -26,31 +28,32 @@
         android:layout_marginTop="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/det_t"
-        app:srcCompat="@android:color/holo_purple" />
+        app:srcCompat="@android:color/holo_purple"
+        android:layout_marginEnd="8dp" />
 
     <TextView
         android:id="@+id/det_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="0dp"
         android:text="TextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/det_t" />
+        app:layout_constraintTop_toBottomOf="@+id/det_t"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/det_g"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="0dp"
         android:text="TextView"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/det_a" />
+        app:layout_constraintTop_toBottomOf="@+id/det_a"
+        android:layout_marginStart="8dp" />
 
     <Button
         android:id="@+id/det_co_h"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
@@ -58,5 +61,7 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 </android.support.constraint.ConstraintLayout>
