@@ -23,7 +23,7 @@ public class BookDisplay extends AppCompatActivity {
 
         if (startingIntent.hasExtra("BookPosition")){
             int bookPosition = startingIntent.getIntExtra("BookPosition", 0);
-            Book book = MainActivity.library[bookPosition];
+            Book book = MainActivity.currentLib[bookPosition];
             String title = book.getTitle();
             String author = book.getAuthor();
             String genre = (book.getGenres())[0];
