@@ -30,21 +30,21 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    static Book b1 = new Book("9X1QCXE6F7VJY0", "99", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
-    static Book b2 = new Book("QE6TGXAXSRE340", "999", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
-    static Book b3 = new Book("WJ3H3XXFW6IMRZ", "999", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
-    static Book b4 = new Book("YHZWPN4903UBDP", "99", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
-    static Book b5 = new Book("3SYEG4Q497GXX5", "999", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
-    static Book b6 = new Book("6WDO9ZFHBQ3QAV", "999", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
-    static Book b7 = new Book("GYWP2Z8YHBVMFS", "99", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
+    static Book b1 = new Book("9X1QCXE6F7VJY0", "30", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
+    static Book b2 = new Book("QE6TGXAXSRE340", "30", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
+    static Book b3 = new Book("WJ3H3XXFW6IMRZ", "15", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
+    static Book b4 = new Book("YHZWPN4903UBDP", "15", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
+    static Book b5 = new Book("3SYEG4Q497GXX5", "30", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
+    static Book b6 = new Book("6WDO9ZFHBQ3QAV", "30", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
+    static Book b7 = new Book("GYWP2Z8YHBVMFS", "15", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
     static Book b8 = new Book("7V8WG4EJOEFOYM", "999", "The American Pageant", "David Kennedy", "History/US History/Nonfiction/Textbook", "", "1");
-    static Book b9 = new Book("0L7WEFCC56R1GP", "99", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
+    static Book b9 = new Book("0L7WEFCC56R1GP", "999", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
     static Book b10 = new Book("XID4TQAH03XVBF", "999", "Android Programming: The Big Nerd Ranch", "Phillip Marsicano", "Java/Android/App Development", "", "1");
-    static Book b11 = new Book("PJ7YQM62VR358V", "99", "AP Economics Macro & Micro", "Princeton Review", "AP/Economics", "", "1");
-    static Book b12 = new Book("R7XCFD1S6V7J46", "99", "AP Chemistry", "Princeton Review", "AP/Chemistry", "", "1");
+    static Book b11 = new Book("PJ7YQM62VR358V", "999", "AP Economics Macro & Micro", "Princeton Review", "AP/Economics", "", "1");
+    static Book b12 = new Book("R7XCFD1S6V7J46", "999", "AP Chemistry", "Princeton Review", "AP/Chemistry", "", "1");
     static Book b13 = new Book("WMCX97YJ64M0J1", "999", "AP U.S. History: Premium ap    Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    static Book b15 = new Book("W49B922DJK03PI", "99", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    static Book b14 = new Book("YTHOSN32782943", "99", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    static Book b15 = new Book("W49B922DJK03PI", "999", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
+    static Book b14 = new Book("YTHOSN32782943", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
     public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
 
     private RecyclerView mRecyclerView;

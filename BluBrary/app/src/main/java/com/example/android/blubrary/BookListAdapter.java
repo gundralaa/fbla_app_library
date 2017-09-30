@@ -41,7 +41,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
             holder.mBookTitle.setText(library[position].getTitle());
-            if (library[position].isCheckedOut()) {
+            if (library[position].isCheckedOut() || library[position].isReserved()) {
                 holder.mBookAva.setText("Unavailable");
                 holder.mBookAva.setTextColor(Color.RED);
             } else {
