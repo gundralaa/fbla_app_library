@@ -59,14 +59,27 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
 
             }
         }));
+
+        //get data to set color and things
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
             holder.mBookTitle.setText(library[position].getTitle());
 
             if (library[position].isCheckedOut() || library[position].isReserved()) {
-                holder.mBookAva.setText("Unavailable");
-                holder.mBookAva.setTextColor(Color.RED);
-            } else {
+                if (library[position].isReserved()) {
+                    holder.mBookAva.setText("Reserved");
+                }
+                else {
+                    holder.mBookAva.setText("Unavailable");
+                }
+
+                if (usr.has(library[position])[0]) {
+                    holder.mBookAva.setTextColor(Color.BLUE);
+                } else {
+                    holder.mBookAva.setTextColor(Color.RED);
+                }
+            }
+            else {
                 holder.mBookAva.setText("Available");
                 holder.mBookAva.setTextColor(Color.GREEN);
             }
