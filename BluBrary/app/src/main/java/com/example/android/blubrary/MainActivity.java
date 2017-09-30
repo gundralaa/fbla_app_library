@@ -1,5 +1,7 @@
 package com.example.android.blubrary;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,23 +18,26 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    Book b1 = new Book("1", "99", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
-    Book b2 = new Book("1", "999", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
-    Book b3 = new Book("1", "999", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
-    Book b4 = new Book("1", "99", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
-    Book b5 = new Book("1", "999", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
-    Book b6 = new Book("1", "999", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
-    Book b7 = new Book("1", "99", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
-    Book b8 = new Book("1", "999", "The American Pageant", "David Kennedy", "History/US History/Nonfiction/Textbook", "", "1");
-    Book b9 = new Book("1", "99", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
-    Book b10 = new Book("1", "999", "Android Programming: The Big Nerd Ranch", "Phillip Marsicano", "Java/Android/App Development", "", "1");
-    Book b11 = new Book("1", "99", "AP Economics Macro & Micro", "Princeton Review", "AP/Economics", "", "1");
-    Book b12 = new Book("1", "99", "AP Chemistry", "Princeton Review", "AP/Chemistry", "", "1");
-    Book b13 = new Book("1", "999", "AP U.S. History: Premium ap    Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    Book b15 = new Book("1", "99", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    Book b14 = new Book("1", "99", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
-    Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
+        implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
+
+
+    static Book b1 = new Book("9X1QCXE6F7VJY0", "30", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
+    static Book b2 = new Book("QE6TGXAXSRE340", "30", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
+    static Book b3 = new Book("WJ3H3XXFW6IMRZ", "15", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
+    static Book b4 = new Book("YHZWPN4903UBDP", "15", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
+    static Book b5 = new Book("3SYEG4Q497GXX5", "30", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
+    static Book b6 = new Book("6WDO9ZFHBQ3QAV", "30", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
+    static Book b7 = new Book("GYWP2Z8YHBVMFS", "15", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
+    static Book b8 = new Book("7V8WG4EJOEFOYM", "999", "The American Pageant", "David Kennedy", "History/US History/Nonfiction/Textbook", "", "1");
+    static Book b9 = new Book("0L7WEFCC56R1GP", "999", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
+    static Book b10 = new Book("XID4TQAH03XVBF", "999", "Android Programming: The Big Nerd Ranch", "Phillip Marsicano", "Java/Android/App Development", "", "1");
+    static Book b11 = new Book("PJ7YQM62VR358V", "999", "AP Economics Macro & Micro", "Princeton Review", "AP/Economics", "", "1");
+    static Book b12 = new Book("R7XCFD1S6V7J46", "999", "AP Chemistry", "Princeton Review", "AP/Chemistry", "", "1");
+    static Book b13 = new Book("WMCX97YJ64M0J1", "999", "AP U.S. History: Premium ap    Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
+    static Book b15 = new Book("W49B922DJK03PI", "999", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
+    static Book b14 = new Book("YTHOSN32782943", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
+    public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
+    public User pom = new User("Tom","1234", new String[0],new String[0]);
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
     private EditText titleIn;
@@ -67,13 +72,15 @@ public class MainActivity extends AppCompatActivity
         //spine = (Spinner)findViewById(R.id.spinz);
         mRecyclerView.setAdapter(mBookListAdapter);
         Button searchButton = (Button) findViewById(R.id.searchB);
+        Button buttonReserve = (Button) findViewById(R.id.button_checkout);
+
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("all goodo", "button.press");
                 Log.d("all goodo", titleIn.getText().toString());
                 Log.d("all goodo", authorIn.getText().toString());
                 Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()));
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
                 Log.d("all goodo", "button.press passed");
                 mRecyclerView.setAdapter(mBookListAdapter);
                 Log.d("all goodo", "reset adapter");
@@ -136,5 +143,20 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(int position) {
+
+        Context context = MainActivity.this;
+
+        Class destinationActivity = BookDisplay.class;
+
+        Intent startChildActivityIntent = new Intent(context, destinationActivity);
+
+        startChildActivityIntent.putExtra("BookPosition", position);
+
+        startActivity(startChildActivityIntent);
+
     }
 }

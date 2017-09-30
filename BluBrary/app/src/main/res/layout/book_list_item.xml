@@ -11,18 +11,31 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_checkout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+
+            android:layout_height="wrap_content"
+
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:text="More"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Checkout"
+            app:layout_constraintBottom_toTopOf="@+id/button_reserve"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintTop_creator="1" />
+        <Button
+            android:id="@+id/button_reserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="Reserve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_checkout"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1" />
+
 
 
         <TextView
@@ -34,34 +47,36 @@
             android:layout_marginTop="8dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button"
+            app:layout_constraintRight_toLeftOf="@+id/button_checkout"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            tools:layout_constraintTop_creator="1"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/tv_book_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"
             android:textStyle="italic"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button"
+            app:layout_constraintRight_toLeftOf="@+id/button_checkout"
             app:layout_constraintTop_toBottomOf="@+id/tv_book_name" />
+
 
         <TextView
             android:id="@+id/tv_book_ava"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"
             android:text=""
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button"
+
+            app:layout_constraintRight_toLeftOf="@+id/button_checkout"
             app:layout_constraintTop_toBottomOf="@+id/tv_book_author" />
+
 
     </android.support.constraint.ConstraintLayout>
 
