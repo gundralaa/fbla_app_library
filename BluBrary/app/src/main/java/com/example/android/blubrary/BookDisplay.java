@@ -34,15 +34,7 @@ public class BookDisplay extends AppCompatActivity {
             mTitleView.setText(title);
             mAuthorView.setText(author);
             mGenreView.setText(genre);
-            Button buttonCO = (Button) findViewById(R.id.button_reserve);
-            Button butonRes = (Button) findViewById(R.id.button_reserve);
-            butonRes.setOnClickListener((new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("reserve clicked","loghh");
-                    Log.d("reserve clicked", book.getTitle());
-                    Log.d("reserve clicked", title);
-                }
-            }));
+
         }
 
     }

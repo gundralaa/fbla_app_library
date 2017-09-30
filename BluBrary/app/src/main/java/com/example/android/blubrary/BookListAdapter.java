@@ -43,25 +43,26 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
 
     @Override
     public void onBindViewHolder(BookListViewHolder holder, final int position) {
+        holder.hold.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("reserve clicked", library[position].getTitle());
+                //set reserved
+                usr.reserve(library[position], true);
+
+            }
+        }));
+        holder.co.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("check out clicked", library[position].getTitle());
+                //set checked out
+                usr.checkOut(library[position], true);
+
+            }
+        }));
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
             holder.mBookTitle.setText(library[position].getTitle());
-            holder.hold.setOnClickListener((new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("reserve clicked", library[position].getTitle());
-                    //set reserved
-                    usr.reserve(library[position],true);
 
-                }
-            }));
-            holder.co.setOnClickListener((new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("check out clicked", library[position].getTitle());
-                    //set checked out
-                    usr.checkOut(library[position],true);
-
-                }
-            }));
             if (library[position].isCheckedOut() || library[position].isReserved()) {
                 holder.mBookAva.setText("Unavailable");
                 holder.mBookAva.setTextColor(Color.RED);
