@@ -27,7 +27,7 @@ class Book {
         this.author = a;
         this.genre = g.split("/");
         this.pictureFile = pf;
-        this.shelfNumber = Integer.parseInt(sn);
+        //this.shelfNumber = Integer.parseInt(sn);
     }
 
     // should be called when first adding a book, or when updating the book
