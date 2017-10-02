@@ -27,8 +27,10 @@ public class BookDisplay extends AppCompatActivity {
 
         if (startingIntent.hasExtra("BookPosition")) {
             int bookPosition = startingIntent.getIntExtra("BookPosition", 0);
-            final Book book = MainActivity.library[bookPosition];
-            final String title = book.getTitle();
+
+            Book book = MainActivity.currentLib[bookPosition];
+            String title = book.getTitle();
+
             String author = book.getAuthor();
             String genre = (book.getGenres())[0];
             mTitleView.setText(title);

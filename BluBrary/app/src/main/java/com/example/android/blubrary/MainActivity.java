@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,13 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
+
+
+    public static Book [] library = Resources.library;
+
+    public static Book [] currentLib;
+
+
     static Book b1 = new Book("	1	", "999", "	Sycamore Row	", "	John Grisham	", "	Law/Fiction	", "", "");
     static Book b2 = new Book("	2	", "999", "	The Innocent Man	", "	John Grisham	", "	Law/Fiction	", "", "");
     static Book b3 = new Book("	3	", "999", "	The Litigators	", "	John Grisham	", "	Law/Fiction	", "", "");
@@ -59,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     static Book b38 = new Book("	38	", "999", "	America's National Parks and Monuments	", "	Roger Clemenz	", "	Photography	", "", "");
     static Book b39 = new Book("	39	", "999", "	Plants of the Pacific Northwest Coast	", "	Lone Pine	", "	Botany/Nonfiction	", "", "");
     static Book b40 = new Book("	40	", "999", "	Solar Electrity Handbook 2013 Edition	", "	Micheal Boxwell	", "	Solar/Nonfiction	", "", "");
-    public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15,b16,b17,b18,b19,b20,b21,b22,b23,b24,b25,b26,b27,b28,b29,b30,b31,b32,b33,b34,b35,b36,b37,b38,b39,b40};
+    public static Book[] library2 = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15,b16,b17,b18,b19,b20,b21,b22,b23,b24,b25,b26,b27,b28,b29,b30,b31,b32,b33,b34,b35,b36,b37,b38,b39,b40};
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
@@ -71,11 +79,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -169,7 +177,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(int position, Book lib []) {
+
+        currentLib = lib;
 
         Context context = MainActivity.this;
 

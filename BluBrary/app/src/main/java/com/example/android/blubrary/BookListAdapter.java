@@ -23,7 +23,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     private final BookListAdapterClickHandler mClickHandler;
 
     public interface BookListAdapterClickHandler {
-        void onClick(int position);
+        void onClick(int position, Book lib []);
     }
 
     public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler, User inusr) {
@@ -103,7 +103,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            mClickHandler.onClick(adapterPosition);
+            mClickHandler.onClick(adapterPosition, library);
         }
 
     }
