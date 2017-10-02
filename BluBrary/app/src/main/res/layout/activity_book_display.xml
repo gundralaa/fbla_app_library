@@ -11,27 +11,31 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_book_name_more"
             android:textSize="32sp"
             app:layout_constraintTop_toTopOf="parent"/>
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_book_author_more"
-            app:layout_constraintTop_toBottomOf="@id/tv_book_name_more"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_name_more"
+            tools:layout_editor_absoluteX="8dp" />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_book_genre_more"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_author_more"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_author_more"
+            tools:layout_editor_absoluteX="8dp" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_map"
             android:text="Map"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_genre_more"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_genre_more"
+            tools:layout_editor_absoluteX="0dp" />
 
     </android.support.constraint.ConstraintLayout>
 

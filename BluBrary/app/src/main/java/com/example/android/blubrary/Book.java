@@ -27,7 +27,7 @@ class Book {
         this.author = a;
         this.genre = g.split("/");
         this.pictureFile = pf;
-        this.shelfNumber = Integer.parseInt(sn);
+        //this.shelfNumber = Integer.parseInt(sn);
     }
 
     // should be called when first adding a book, or when updating the book
@@ -90,20 +90,28 @@ class Book {
         writer.close();
     }
     public boolean isCheckedOut() {
-        return this.daysUntilDue != 999;
+        return this.daysUntilDue <= 20;
     }
-    public void setCheckedOut(boolean x) throws Exception {
+    public boolean isReserved() { return this.daysUntilDue <= 40 && !(this.isCheckedOut());}
+    public void setCheckedOut(boolean x) {
         if (x) {
             this.daysUntilDue = 20;
         } else {
             this.daysUntilDue = 999;
         }
-        this.saveBook();
+        //this.saveBook();
+    }
+    public void setReserved(boolean y) {
+        if (y) {
+            this.daysUntilDue = 40;
+        } else {
+            this.daysUntilDue = 999;
+        }
     }
     public String getTitle() {
         return this.title;
     }
-
+    public boolean isOverdue() {return this.daysUntilDue <= 0;}
     String getAuthor() {
         return this.author;
     }

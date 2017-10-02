@@ -3,9 +3,11 @@ package com.example.android.blubrary;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -13,7 +15,10 @@ import android.widget.TextView;
  */
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
+
     Book library[];
+    User usr;
+
 
     private final BookListAdapterClickHandler mClickHandler;
 
@@ -21,9 +26,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         void onClick(int position, Book lib []);
     }
 
-    public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler) {
+    public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler, User inusr) {
         mClickHandler = clickHandler;
         library = inLib;
+        usr = inusr;
     }
 
     @Override
@@ -37,11 +43,28 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     }
 
     @Override
-    public void onBindViewHolder(BookListViewHolder holder, int position) {
+    public void onBindViewHolder(BookListViewHolder holder, final int position) {
+        holder.hold.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("reserve clicked", library[position].getTitle());
+                //set reserved
+                usr.reserve(library[position], true);
+
+            }
+        }));
+        holder.co.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("check out clicked", library[position].getTitle());
+                //set checked out
+                usr.checkOut(library[position], true);
+
+            }
+        }));
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
             holder.mBookTitle.setText(library[position].getTitle());
-            if (library[position].isCheckedOut()) {
+
+            if (library[position].isCheckedOut() || library[position].isReserved()) {
                 holder.mBookAva.setText("Unavailable");
                 holder.mBookAva.setTextColor(Color.RED);
             } else {
@@ -63,12 +86,16 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         public final TextView mBookTitle;
         public final TextView mAuthorName;
         public final TextView mBookAva;
+        public final Button hold;
+        public final Button co;
 
         public BookListViewHolder(View view) {
             super(view);
             mBookTitle = (TextView) view.findViewById(R.id.tv_book_name);
             mBookAva = (TextView) view.findViewById(R.id.tv_book_ava);
             mAuthorName = (TextView) view.findViewById(R.id.tv_book_author);
+            hold = (Button) view.findViewById(R.id.button_reserve);
+            co = (Button) view.findViewById(R.id.button_checkout);
 
             view.setOnClickListener(this);
         }
@@ -78,5 +105,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             int adapterPosition = getAdapterPosition();
             mClickHandler.onClick(adapterPosition, library);
         }
+
     }
 }
