@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.blubrary.LoginActivity">
+
+    <TextView
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_welcome"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="sans-serif"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="53dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="8dp"
+        android:id="@+id/textView4" />
+    <TextView
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_prompt"
+        android:textSize="22sp"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="137dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="204dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="8dp"
+        android:hint="Username"
+        android:id="@+id/username_text" />
+
+    <EditText
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="284dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:id="@+id/password_text"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/login_button"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="358dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="148dp" />
+
+
+</android.support.constraint.ConstraintLayout>

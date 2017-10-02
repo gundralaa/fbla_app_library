@@ -15,6 +15,9 @@
         <item>Neptune</item>
     </string-array>
 
+    <string name="login_welcome">Welcome to BluBrary</string>
+    <string name="login_prompt">Sign In Here!</string>
+
     <string name="action_settings">Settings</string>
     <string name="search">Search</string>
 </resources>

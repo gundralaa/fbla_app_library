@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity
     static Book b15 = new Book("W49B922DJK03PI", "999", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
     static Book b14 = new Book("YTHOSN32782943", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
     public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
+
     public User pom = new User("Tom","1234", new String[0],new String[0]);
+
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
     private EditText titleIn;
