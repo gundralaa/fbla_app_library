@@ -56,19 +56,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//       drawer.setDrawerListener(toggle);
-//       toggle.syncState();
+       drawer.setDrawerListener(toggle);
+       toggle.syncState();
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
 
-        //navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books);
 
@@ -77,46 +76,32 @@ public class MainActivity extends AppCompatActivity
 
 //
         titleIn = (EditText) findViewById(R.id.intxt);
-        loginButton = (Button) findViewById(R.id.login);
-        username = (EditText) findViewById(R.id.username_box);
-        password = (EditText) findViewById(R.id.pw_box);
         authorIn = (EditText) findViewById(R.id.inauth);
         genreIn = (EditText) findViewById(R.id.ingenre);
-//
         Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
-        loginButton.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("log log", "login in...");
-                Log.d("log dam", username.getText().toString());
-                Log.d("log dam", password.getText().toString());
-                current_usr = login_check(username.getText().toString(), password.getText().toString(), usrs);
-                if (current_usr != 999) {
-                    setContentView(R.layout.activity_main);
-                    //drawer.setDrawerListener(toggle);
-                    //toggle.syncState();
-                   //navigationView.setNavigationItemSelectedListener(MainActivity.this);
-                   //mRecyclerView.setLayoutManager(layoutManager);
-                   //mRecyclerView.setAdapter(mBookListAdapter);
-                }
 
+        setContentView(R.layout.activity_main);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
-                //current_usr = login_check()
-            }
-        }));
-//       searchButton.setOnClickListener((new View.OnClickListener() {
-//           public void onClick(View v) {
-//               //Toaster.toast("TOASTED BITCH",MainActivity.this);
-//               Log.d("all goodo", "button.press");
-//               Log.d("all goodo", titleIn.getText().toString());
-//               Log.d("all goodo", authorIn.getText().toString());
-//               Log.d("all goodo", genreIn.getText().toString());
-//               mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, usrs[current_usr]);
-//               Log.d("all goodo", "button.press passed");
-//               mRecyclerView.setAdapter(mBookListAdapter);
-//               Log.d("all goodo", "reset adapter");
-//           }
-//       }));
+        navigationView.setNavigationItemSelectedListener(MainActivity.this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mBookListAdapter);
+
+        searchButton.setOnClickListener((new View.OnClickListener() {
+          public void onClick(View v) {
+               //Toaster.toast("TOASTED BITCH",MainActivity.this);
+               Log.d("all goodo", "button.press");
+               Log.d("all goodo", titleIn.getText().toString());
+               Log.d("all goodo", authorIn.getText().toString());
+               Log.d("all goodo", genreIn.getText().toString());
+               mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, usrs[current_usr]);
+               Log.d("all goodo", "button.press passed");
+               mRecyclerView.setAdapter(mBookListAdapter);
+               Log.d("all goodo", "reset adapter");
+           }
+       }));
     }
 
     @Override
