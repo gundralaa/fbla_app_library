@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
 
@@ -37,55 +39,84 @@ public class MainActivity extends AppCompatActivity
     static Book b15 = new Book("W49B922DJK03PI", "999", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
     static Book b14 = new Book("YTHOSN32782943", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
     public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
-    public User pom = new User("Tom","1234", new String[0],new String[0]);
+    static User danny = new User("saeli", "Norway", new String[0], new String[0]);
+    static User abhi = new User("abhin", "sowmya", new String[0], new String[0]);
+    static User tom = new User("Tom", "Iambest", new String[0], new String[0]);
+    public int current_usr = 999;
+    static User[] usrs = new User[]{tom, danny, abhi};
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
     private EditText titleIn;
     private EditText authorIn;
     private EditText genreIn;
+    private EditText username;
+    private EditText password;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//       drawer.setDrawerListener(toggle);
+//       toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+
+        //navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books);
 
-        LinearLayoutManager layoutManager
+        final LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        mRecyclerView.setLayoutManager(layoutManager);
+//
         titleIn = (EditText) findViewById(R.id.intxt);
+        loginButton = (Button) findViewById(R.id.login);
+        username = (EditText) findViewById(R.id.username_box);
+        password = (EditText) findViewById(R.id.pw_box);
         authorIn = (EditText) findViewById(R.id.inauth);
         genreIn = (EditText) findViewById(R.id.ingenre);
-        //mBookListAdapter = new BookListAdapter(library);
-        //spine = (Spinner)findViewById(R.id.spinz);
-        mRecyclerView.setAdapter(mBookListAdapter);
+//
         Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
-
-        searchButton.setOnClickListener((new View.OnClickListener() {
+        loginButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("all goodo", "button.press");
-                Log.d("all goodo", titleIn.getText().toString());
-                Log.d("all goodo", authorIn.getText().toString());
-                Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
-                Log.d("all goodo", "button.press passed");
-                mRecyclerView.setAdapter(mBookListAdapter);
-                Log.d("all goodo", "reset adapter");
+                Log.d("log log", "login in...");
+                Log.d("log dam", username.getText().toString());
+                Log.d("log dam", password.getText().toString());
+                current_usr = login_check(username.getText().toString(), password.getText().toString(), usrs);
+                if (current_usr != 999) {
+                    setContentView(R.layout.activity_main);
+                    //drawer.setDrawerListener(toggle);
+                    //toggle.syncState();
+                   //navigationView.setNavigationItemSelectedListener(MainActivity.this);
+                   //mRecyclerView.setLayoutManager(layoutManager);
+                   //mRecyclerView.setAdapter(mBookListAdapter);
+                }
+
+
+                //current_usr = login_check()
             }
         }));
+//       searchButton.setOnClickListener((new View.OnClickListener() {
+//           public void onClick(View v) {
+//               //Toaster.toast("TOASTED BITCH",MainActivity.this);
+//               Log.d("all goodo", "button.press");
+//               Log.d("all goodo", titleIn.getText().toString());
+//               Log.d("all goodo", authorIn.getText().toString());
+//               Log.d("all goodo", genreIn.getText().toString());
+//               mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, usrs[current_usr]);
+//               Log.d("all goodo", "button.press passed");
+//               mRecyclerView.setAdapter(mBookListAdapter);
+//               Log.d("all goodo", "reset adapter");
+//           }
+//       }));
     }
 
     @Override
@@ -159,4 +190,23 @@ public class MainActivity extends AppCompatActivity
         startActivity(startChildActivityIntent);
 
     }
+
+    public int login_check(String usr, String pw, User[] usrs) {
+        for (int check = 0; check < usrs.length; check++) {
+            Log.d("USERNAME @ CHECK", usrs[check].getUsername());
+            Log.d("USERNAME BOX    ", usr);
+            if (Objects.equals(usrs[check].getUsername(), usr)) {
+                Log.d("y", "usr pass");
+                if (Objects.equals(usrs[check].getPassword(), pw)) {
+                    Log.d("y", "pw poass");
+                    Toaster.toast("Loging in...", this);
+                    return check;
+                }
+            }
+        }
+        Toaster.toast("Invalid Username/Password, try again.", this);
+        return 999;
+    }
+
 }
+

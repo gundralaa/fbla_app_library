@@ -22,7 +22,22 @@ public class User {
             this.checkedOut.add(x);
         }
     }
+    public int login_check(String usr, String pw, User[] usrs) {
+        for (int i = 0; i < usrs.length; i++) {
+            if (usr == usrs[i].getUsername()) {
+                if (pw == usrs[i].getPassword()) {
+                    //Toaster.toast("loging in", User.this);
+                    return i;
+                } else {
+                    //Toaster.toast("Invalid password", Search.this);
+                    return 999;
+                }
+            }
+        }
+        //Toaster.toast("Invalid username", Search.this);
+        return 999;
 
+    }
     public String[] getReserved() {
         String[] output = new String[reserved.size()];
         int curr = 0;
@@ -94,5 +109,13 @@ public class User {
             }
 
         }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
