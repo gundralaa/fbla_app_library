@@ -20,10 +20,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
-
-
     public static Book [] library = Resources.library;
-
     public static Book [] currentLib;
 
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
