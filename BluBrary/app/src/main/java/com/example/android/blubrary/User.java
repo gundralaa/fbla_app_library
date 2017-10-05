@@ -33,6 +33,14 @@ public class User {
         return output;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     public String[] getCheckedOut() {
         String[] output = new String[checkedOut.size()];
         int curr = 0;

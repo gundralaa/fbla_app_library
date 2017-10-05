@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,25 +20,12 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
-
-
-    static Book b1 = new Book("9X1QCXE6F7VJY0", "30", "Sycamore Row", "John Grisham", "Law/Fiction", "", "1");
-    static Book b2 = new Book("QE6TGXAXSRE340", "30", "The Innocent Man", "John Grisham", "Law/Fiction", "", "1");
-    static Book b3 = new Book("WJ3H3XXFW6IMRZ", "15", "The Litigators", "John Grisham", "Law/Fiction", "", "1");
-    static Book b4 = new Book("YHZWPN4903UBDP", "15", "People who Changed the Wold", "Barak Obama", "Insiprational/Nonfiction", "", "1");
-    static Book b5 = new Book("3SYEG4Q497GXX5", "30", "Living by Chemistry", "Angelica Stacy", "Textbook/Chemistry/Nonfiction", "", "1");
-    static Book b6 = new Book("6WDO9ZFHBQ3QAV", "30", "Barron's AP Computer Science A", "Roselyn Teukolsky", "Textbook/Computer Science/Java/AP/Nonfiction", "", "1");
-    static Book b7 = new Book("GYWP2Z8YHBVMFS", "15", "The Almanac of American History", "Arthor Bowman", "History/US History/Nonfiction", "", "1");
-    static Book b8 = new Book("7V8WG4EJOEFOYM", "999", "The American Pageant", "David Kennedy", "History/US History/Nonfiction/Textbook", "", "1");
-    static Book b9 = new Book("0L7WEFCC56R1GP", "999", "Precalculus, 7th edition", "Larson Hostetler", "Math/Textbook/Precalculus", "", "1");
-    static Book b10 = new Book("XID4TQAH03XVBF", "999", "Android Programming: The Big Nerd Ranch", "Phillip Marsicano", "Java/Android/App Development", "", "1");
-    static Book b11 = new Book("PJ7YQM62VR358V", "999", "AP Economics Macro & Micro", "Princeton Review", "AP/Economics", "", "1");
-    static Book b12 = new Book("R7XCFD1S6V7J46", "999", "AP Chemistry", "Princeton Review", "AP/Chemistry", "", "1");
-    static Book b13 = new Book("WMCX97YJ64M0J1", "999", "AP U.S. History: Premium ap    Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    static Book b15 = new Book("W49B922DJK03PI", "999", "AP World History: Premium Edition", "Princeton Review", "History/US History/Nonfiction/AP", "", "1");
-    static Book b14 = new Book("YTHOSN32782943", "999", "AP U.S. History 2017-2018", "Krista Dornbush", "History/US History/Nonfiction/AP", "", "1");
-    public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15};
-    public User dan = new UserObjects().getUsers()[0];
+    
+    public static Book [] library = Resources.library;
+    public static Book [] currentLib;
+    public User pom = new User("Tom", "1234", new String[0], new String[0]);
+    public User [] users = UserObjects.getUsers();
+    public User currentUser;
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
     private EditText titleIn;
@@ -48,11 +36,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -86,6 +74,18 @@ public class MainActivity extends AppCompatActivity
                 Log.d("all goodo", "reset adapter");
             }
         }));
+
+        Intent startingIntent = getIntent();
+        if (startingIntent.hasExtra("User")) {
+            String username = startingIntent.getStringExtra("User");
+
+            for (User user: users){
+                if (user.getUsername().equals(username)){
+                    currentUser = user;
+                }
+            }
+
+        }
     }
 
     @Override
@@ -120,23 +120,27 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_map) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_virtual_map) {
+
+        } else if (id == R.id.nav_sign_out) {
 
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_books) {
+
+            Intent startBooksActivityIntent = new Intent(MainActivity.this, UserBooksActivity.class);
+            String username = currentUser.getUsername();
+            startBooksActivityIntent.putExtra("Username", username);
+            startActivity(startBooksActivityIntent);
 
         }
 
@@ -146,7 +150,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(int position, Book lib []) {
+
+        currentLib = lib;
 
         Context context = MainActivity.this;
 
