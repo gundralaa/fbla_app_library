@@ -34,12 +34,16 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean authorized = loginCheck(users, usernameField.getText().toString(), passwordField.getText().toString());
-                if (authorized) {
+                User loggedInUser = loginCheck(users, usernameField.getText().toString(), passwordField.getText().toString());
+                if (loggedInUser != null) {
+
                     Context context = LoginActivity.this;
                     Class destinationActivity = MainActivity.class;
                     Intent startChildActivityIntent = new Intent(context, destinationActivity);
+                    String username = loggedInUser.getUsername();
+                    startChildActivityIntent.putExtra("User", username);
                     startActivity(startChildActivityIntent);
+
                 } else {
                     em.setVisibility(View.VISIBLE);
                 }
@@ -49,13 +53,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private boolean loginCheck(User[] users, String username, String password) {
+    private User loginCheck(User[] users, String username, String password) {
         for (User user : users) {
             if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
-                return true;
+                return user;
             }
         }
-        return false;
+        return null;
     }
 
 
