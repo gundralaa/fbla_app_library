@@ -11,17 +11,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
-    public static Book [] library = Resources.library;
-    public static Book [] currentLib;
+    public static Book[] library = Resources.library;
+    public static Book[] currentLib;
 
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
     private RecyclerView mRecyclerView;
@@ -54,22 +54,28 @@ public class MainActivity extends AppCompatActivity
         titleIn = (EditText) findViewById(R.id.intxt);
         authorIn = (EditText) findViewById(R.id.inauth);
         genreIn = (EditText) findViewById(R.id.ingenre);
-        //mBookListAdapter = new BookListAdapter(library);
-        //spine = (Spinner)findViewById(R.id.spinz);
         mRecyclerView.setAdapter(mBookListAdapter);
-        Button searchButton = (Button) findViewById(R.id.searchB);
+        final Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
 
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("all goodo", "button.press");
-                Log.d("all goodo", titleIn.getText().toString());
-                Log.d("all goodo", authorIn.getText().toString());
-                Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
-                Log.d("all goodo", "button.press passed");
-                mRecyclerView.setAdapter(mBookListAdapter);
-                Log.d("all goodo", "reset adapter");
+                if (titleIn.getVisibility() == View.VISIBLE) {
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                    mRecyclerView.setAdapter(mBookListAdapter);
+                    titleIn.setVisibility(View.GONE);
+                    authorIn.setVisibility(View.GONE);
+                    genreIn.setVisibility(View.GONE);
+                    searchButton.setText("Search Again");
+                } else {
+                    titleIn.setVisibility(View.VISIBLE);
+                    authorIn.setVisibility(View.VISIBLE);
+                    genreIn.setVisibility(View.VISIBLE);
+                    searchButton.setText("Search");
+                }
+
             }
         }));
     }
@@ -132,7 +138,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(int position, Book lib []) {
+    public void onClick(int position, Book lib[]) {
 
         currentLib = lib;
 

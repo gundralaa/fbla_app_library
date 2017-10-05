@@ -10,47 +10,71 @@
 
     <EditText
         android:id="@+id/intxt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Title"
-        android:layout_gravity="end"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/inauth"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Author"
-        android:layout_gravity="end"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/intxt"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intxt" />
 
     <EditText
         android:id="@+id/ingenre"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Genre"
-        android:layout_gravity="end"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/inauth"
-        android:shadowColor="@color/colorPrimaryDark"/>
+        android:shadowColor="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inauth" />
 
     <Button
         android:id="@+id/searchB"
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/search"
-        app:layout_constraintTop_toBottomOf="@+id/ingenre"/>
+        app:layout_constraintTop_toBottomOf="@+id/ingenre"
+        tools:layout_editor_absoluteX="8dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_books"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/searchB"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-3dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchB" />
 
 </android.support.constraint.ConstraintLayout>
