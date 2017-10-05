@@ -16,7 +16,7 @@ public class BookDisplay extends AppCompatActivity {
     TextView mGenreView;
     TextView mCallView;
     TextView mShelfView;
-    ImageView mCoverArt;
+    //ImageView mCoverArt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class BookDisplay extends AppCompatActivity {
         mGenreView = (TextView) findViewById(R.id.tv_book_genre_more);
         mCallView = (TextView) findViewById(R.id.tv_book_callNum_more);
         mShelfView = (TextView) findViewById(R.id.tv_book_shelfNum_more);
+        //mCoverArt = (ImageView) findViewById(R.id.tv_book_cover_art);
         Intent startingIntent = getIntent();
 
         if (startingIntent.hasExtra("BookPosition")) {
