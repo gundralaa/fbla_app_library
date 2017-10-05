@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
     public static Book[] currentLib;
 
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
-    public User [] users = UserObjects.getUsers();
+    public User[] users = UserObjects.getUsers();
     public User currentUser;
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books);
-
+        String a = pom.getCheckedOut();
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity
         sortBy.setAdapter(sortDDAdpt);
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
+                String a = pom.getCheckedOut();
+                pom.cBooks();
+
                 if (titleIn.getVisibility() == View.VISIBLE) {
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
@@ -110,8 +113,8 @@ public class MainActivity extends AppCompatActivity
         if (startingIntent.hasExtra("User")) {
             String username = startingIntent.getStringExtra("User");
 
-            for (User user: users){
-                if (user.getUsername().equals(username)){
+            for (User user : users) {
+                if (user.getUsername().equals(username)) {
                     currentUser = user;
                 }
             }

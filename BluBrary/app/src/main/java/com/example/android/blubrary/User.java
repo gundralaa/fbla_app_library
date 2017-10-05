@@ -1,5 +1,11 @@
 package com.example.android.blubrary;
+
+import android.util.Log;
+
 import java.util.ArrayList;
+
+import static com.example.android.blubrary.Resources.library;
+
 /**
  * Created by saeli on 9/29/2017.
  */
@@ -41,15 +47,29 @@ public class User {
         return username;
     }
 
-    public String[] getCheckedOut() {
-        String[] output = new String[checkedOut.size()];
-        int curr = 0;
-        for (String x: checkedOut) {
-            output[curr] = x;
-            curr++;
+    public String getCheckedOut() {
+        String output = "X";
+        for (int i = 0; i < checkedOut.size(); i++) {
+            output += checkedOut.get(i) + "X";
+            Log.d("oupt", output);
         }
         return output;
     }
+
+    public Book[] cBooks() {
+        Book outLib[] = new Book[checkedOut.size()];
+        String usrHas = getCheckedOut();
+        int cc = 0;
+        for (int i = 0; i < library.length; i++) {
+            if (usrHas.contains("X" + library[i].getCallNumber() + "X")) {
+                outLib[cc] = library[i];
+                cc++;
+            }
+        }
+
+        return outLib;
+    }
+
 
     public boolean[] has(Book book) {
         boolean[] output = {false, false}; // corresponds to having the book, and having it checked out (true) or reserved (false)

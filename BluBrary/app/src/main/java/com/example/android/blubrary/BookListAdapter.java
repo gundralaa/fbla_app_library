@@ -3,7 +3,6 @@ package com.example.android.blubrary;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,9 @@ import android.widget.TextView;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
 
+    private final BookListAdapterClickHandler mClickHandler;
     Book library[];
     User usr;
-
-
-    private final BookListAdapterClickHandler mClickHandler;
-
-    public interface BookListAdapterClickHandler {
-        void onClick(int position, Book lib []);
-    }
 
     public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler, User inusr) {
         mClickHandler = clickHandler;
@@ -46,7 +39,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public void onBindViewHolder(BookListViewHolder holder, final int position) {
         holder.hold.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("reserve clicked", library[position].getTitle());
                 //set reserved
                 usr.reserve(library[position], true);
 
@@ -54,7 +46,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         }));
         holder.co.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("check out clicked", library[position].getTitle());
                 //set checked out
                 usr.checkOut(library[position], true);
 
@@ -97,6 +88,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public int getItemCount() {
         if (null == library) return 0;
         return library.length;
+    }
+
+    public interface BookListAdapterClickHandler {
+        void onClick(int position, Book lib[]);
     }
 
     class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
