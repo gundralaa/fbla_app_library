@@ -20,9 +20,9 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
+    
     public static Book [] library = Resources.library;
     public static Book [] currentLib;
-
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
     public User [] users = UserObjects.getUsers();
     public User currentUser;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
                 Log.d("all goodo", titleIn.getText().toString());
                 Log.d("all goodo", authorIn.getText().toString());
                 Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, dan);
                 Log.d("all goodo", "button.press passed");
                 mRecyclerView.setAdapter(mBookListAdapter);
                 Log.d("all goodo", "reset adapter");
