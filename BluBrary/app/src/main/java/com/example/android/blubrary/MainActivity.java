@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
                 Log.d("all goodo", titleIn.getText().toString());
                 Log.d("all goodo", authorIn.getText().toString());
                 Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, dan);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
                 Log.d("all goodo", "button.press passed");
                 mRecyclerView.setAdapter(mBookListAdapter);
                 Log.d("all goodo", "reset adapter");
