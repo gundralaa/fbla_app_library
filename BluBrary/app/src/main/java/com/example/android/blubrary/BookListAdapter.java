@@ -63,7 +63,12 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         //get data to set color and things
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
-            holder.mBookTitle.setText(library[position].getTitle());
+            String title = library[position].getTitle();
+            if (title.length() > 31) {
+                holder.mBookTitle.setText((title.substring(0,30) + "..."));
+            } else {
+                holder.mBookTitle.setText(library[position].getTitle());
+            }
 
             if (library[position].isCheckedOut() || library[position].isReserved()) {
                 if (library[position].isReserved()) {

@@ -31,6 +31,7 @@ public class BookDisplay extends AppCompatActivity {
             final String title = book.getTitle();
             String author = book.getAuthor();
             String genre = (book.getGenres())[0];
+            
             mTitleView.setText(title);
             mAuthorView.setText(author);
             mGenreView.setText(genre);
