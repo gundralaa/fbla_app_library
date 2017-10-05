@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         }));
+
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -104,8 +105,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-        }));
 
         Intent startingIntent = getIntent();
         if (startingIntent.hasExtra("User")) {
