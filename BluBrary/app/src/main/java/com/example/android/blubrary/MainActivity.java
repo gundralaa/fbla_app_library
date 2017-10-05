@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity
     public static Book [] currentLib;
 
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
+    public User [] users = UserObjects.getUsers();
+    public User currentUser;
     private RecyclerView mRecyclerView;
     private BookListAdapter mBookListAdapter;
     private EditText titleIn;
@@ -72,6 +74,18 @@ public class MainActivity extends AppCompatActivity
                 Log.d("all goodo", "reset adapter");
             }
         }));
+
+        Intent startingIntent = getIntent();
+        if (startingIntent.hasExtra("User")) {
+            String username = startingIntent.getStringExtra("User");
+
+            for (User user: users){
+                if (user.getUsername().equals(username)){
+                    currentUser = user;
+                }
+            }
+
+        }
     }
 
     @Override
@@ -106,23 +120,23 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_map) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_virtual_map) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_sign_out) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_books) {
 
-        } else if (id == R.id.nav_send) {
+            Intent startBooksActivityIntent = new Intent(MainActivity.this, UserBooksActivity.class);
+            String username = currentUser.getUsername();
+            startBooksActivityIntent.putExtra("Username", username);
+            startActivity(startBooksActivityIntent);
 
         }
 
