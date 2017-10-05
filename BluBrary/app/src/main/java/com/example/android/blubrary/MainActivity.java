@@ -131,10 +131,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sign_out) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_books) {
 
             Intent startBooksActivityIntent = new Intent(MainActivity.this, UserBooksActivity.class);
