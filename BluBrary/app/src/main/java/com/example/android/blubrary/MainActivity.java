@@ -15,8 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private EditText titleIn;
     private EditText authorIn;
     private EditText genreIn;
+    private Spinner sortBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,10 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(mBookListAdapter);
         final Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
-
+        sortBy = (Spinner) findViewById(R.id.sortMode);
+        final String[] sortByList = new String[]{"Sort by Title", "Sort by Author"};
+        ArrayAdapter<String> sortDDAdpt = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sortByList);
+        sortBy.setAdapter(sortDDAdpt);
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 if (titleIn.getVisibility() == View.VISIBLE) {
@@ -78,6 +85,21 @@ public class MainActivity extends AppCompatActivity
 
             }
         }));
+        sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (sortBy.getSelectedItemPosition() == 0) library = Sort.sortByTitle(library);
+                else if (sortBy.getSelectedItemPosition() == 1) library = Sort.sortByAuth(library);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                mRecyclerView.setAdapter(mBookListAdapter);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
