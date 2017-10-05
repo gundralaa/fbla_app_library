@@ -11,18 +11,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
-    
-    public static Book [] library = Resources.library;
-    public static Book [] currentLib;
+
+    public static Book[] library = Resources.library;
+    public static Book[] currentLib;
+
     public User pom = new User("Tom", "1234", new String[0], new String[0]);
     public User [] users = UserObjects.getUsers();
     public User currentUser;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private EditText titleIn;
     private EditText authorIn;
     private EditText genreIn;
+    private Spinner sortBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,24 +61,50 @@ public class MainActivity extends AppCompatActivity
         titleIn = (EditText) findViewById(R.id.intxt);
         authorIn = (EditText) findViewById(R.id.inauth);
         genreIn = (EditText) findViewById(R.id.ingenre);
-        //mBookListAdapter = new BookListAdapter(library);
-        //spine = (Spinner)findViewById(R.id.spinz);
         mRecyclerView.setAdapter(mBookListAdapter);
-        Button searchButton = (Button) findViewById(R.id.searchB);
+        final Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
-
+        sortBy = (Spinner) findViewById(R.id.sortMode);
+        final String[] sortByList = new String[]{"Sort by Title", "Sort by Author"};
+        ArrayAdapter<String> sortDDAdpt = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sortByList);
+        sortBy.setAdapter(sortDDAdpt);
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("all goodo", "button.press");
-                Log.d("all goodo", titleIn.getText().toString());
-                Log.d("all goodo", authorIn.getText().toString());
-                Log.d("all goodo", genreIn.getText().toString());
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
-                Log.d("all goodo", "button.press passed");
-                mRecyclerView.setAdapter(mBookListAdapter);
-                Log.d("all goodo", "reset adapter");
+                if (titleIn.getVisibility() == View.VISIBLE) {
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                    mRecyclerView.setAdapter(mBookListAdapter);
+                    titleIn.setVisibility(View.GONE);
+                    authorIn.setVisibility(View.GONE);
+                    genreIn.setVisibility(View.GONE);
+                    searchButton.setText("Search Again");
+                } else {
+                    titleIn.setVisibility(View.VISIBLE);
+                    authorIn.setVisibility(View.VISIBLE);
+                    genreIn.setVisibility(View.VISIBLE);
+                    searchButton.setText("Search");
+                }
+
             }
         }));
+
+        sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (sortBy.getSelectedItemPosition() == 0) library = Sort.sortByTitle(library);
+                else if (sortBy.getSelectedItemPosition() == 1) library = Sort.sortByAuth(library);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                mRecyclerView.setAdapter(mBookListAdapter);
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Intent startingIntent = getIntent();
         if (startingIntent.hasExtra("User")) {
@@ -86,6 +117,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         }
+
     }
 
     @Override
@@ -146,7 +178,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onClick(int position, Book lib []) {
+    public void onClick(int position, Book lib[]) {
 
         currentLib = lib;
 
