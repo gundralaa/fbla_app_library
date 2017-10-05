@@ -51,6 +51,23 @@ public class User {
         return output;
     }
 
+    public boolean[] has(Book book) {
+        boolean[] output = {false, false}; // corresponds to having the book, and having it checked out (true) or reserved (false)
+        if (checkedOut.contains(book.getCallNumber())) {
+            output[0] = true;
+            output[1] = true;
+            return output;
+        }
+        else if (reserved.contains(book.getCallNumber())) {
+            output[0] = true;
+            output[1] = false;
+            return output;
+        }
+        else {
+            return output;
+        }
+    }
+
     // will attempt to reserve/unreserve a book for a user, will return true if successful, false if failed (book already reserved or unreserved)
     public boolean reserve(Book book, boolean reserving) { // if true, you are reserving, if false, you are unreserving
         if (reserving) {
