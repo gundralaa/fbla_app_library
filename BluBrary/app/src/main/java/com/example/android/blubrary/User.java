@@ -63,6 +63,9 @@ public class User {
             Log.d("outBook:", outBook[i].getTitle());
             Log.d("UsrLib:", usrLib.get(i).getTitle());
         }
+        Log.d("POS", String.valueOf(outBook.length));
+        Log.d("POS", this.getUsername());
+        Resources.setUserBooks(outBook);
         return outBook;
     }
 
