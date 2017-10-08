@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
-public class UserBooksActivity extends AppCompatActivity {
+public class UserBooksActivity extends AppCompatActivity implements BookListAdapter.BookListAdapterClickHandler {
 
     public User[] users = UserObjects.getUsers();
     public User currentUser;
@@ -16,7 +16,7 @@ public class UserBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_books);
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
-        ////BookListAdapter mBookListAdapter = new BookListAdapter(currentUser.cBooks(), MainActivity, currentUser);
+        BookListAdapter mBookListAdapter = new BookListAdapter(currentUser.cBooks(), UserBooksActivity.this, currentUser);
         //mRecyclerView.setAdapter(mBookListAdapter);
 
 
