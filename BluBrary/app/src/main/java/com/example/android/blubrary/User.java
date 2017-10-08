@@ -4,8 +4,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import static com.example.android.blubrary.Resources.library;
-
 /**
  * Created by saeli on 9/29/2017.
  */
@@ -15,12 +13,14 @@ public class User {
     private String password;
     private ArrayList<String> reserved;
     private ArrayList<String> checkedOut;
+    private ArrayList<Book> usrLib;
 
-    public User(String username, String password, String[] reserved, String[] checkedOut) {
+    public User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
         this.username = username;
         this.password = password;
         this.reserved = new ArrayList<String>();
         this.checkedOut = new ArrayList<String>();
+        this.usrLib = new ArrayList<Book>();
         for (String x: reserved) {
             this.reserved.add(x);
         }
@@ -57,17 +57,13 @@ public class User {
     }
 
     public Book[] cBooks() {
-        Book outLib[] = new Book[checkedOut.size()];
-        String usrHas = getCheckedOut();
-        int cc = 0;
-        for (int i = 0; i < library.length; i++) {
-            if (usrHas.contains("X" + library[i].getCallNumber() + "X")) {
-                outLib[cc] = library[i];
-                cc++;
-            }
+        Book[] outBook = new Book[usrLib.size()];
+        for (int i = 0; i < usrLib.size(); i++) {
+            outBook[i] = usrLib.get(i);
+            Log.d("outBook:", outBook[i].getTitle());
+            Log.d("UsrLib:", usrLib.get(i).getTitle());
         }
-
-        return outLib;
+        return outBook;
     }
 
 
@@ -124,6 +120,7 @@ public class User {
             else {
                 book.setCheckedOut(true);
                 this.checkedOut.add(book.getCallNumber());
+                this.usrLib.add(book);
                 return true;
             }
         }

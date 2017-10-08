@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity
 
     public static Book[] library = Resources.library;
     public static Book[] currentLib;
-
-    public User pom = new User("Tom", "1234", new String[0], new String[0]);
+    public Book blanks[] = new Book[0];
+    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
     public User[] users = UserObjects.getUsers();
     public User currentUser;
     private RecyclerView mRecyclerView;
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                    mBookListAdapter = new BookListAdapter(pom.cBooks(), MainActivity.this, pom);
                     mRecyclerView.setAdapter(mBookListAdapter);
                     titleIn.setVisibility(View.GONE);
                     authorIn.setVisibility(View.GONE);
