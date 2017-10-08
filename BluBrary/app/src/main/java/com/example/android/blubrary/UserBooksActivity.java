@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -28,7 +29,11 @@ public class UserBooksActivity extends AppCompatActivity implements BookListAdap
         Log.d("work you piece of shit", currentUser.getUsername());
 //        Log.d("work you piece of shit", String.valueOf(Resources.getUserBooks().length));
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
-        BookListAdapter mBookListAdapter = new BookListAdapter(Resources.library, UserBooksActivity.this, currentUser);//replace Resources.library with Resources.getUserBooks or User.cBooks
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        BookListAdapter mBookListAdapter = new BookListAdapter(Resources.getUserBooks(), UserBooksActivity.this, currentUser);//replace Resources.library with Resources.getUserBooks or User.cBooks
         mRecyclerView.setAdapter(mBookListAdapter);
 
     }

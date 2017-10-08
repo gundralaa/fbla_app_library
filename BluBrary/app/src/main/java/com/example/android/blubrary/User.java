@@ -124,6 +124,7 @@ public class User {
                 book.setCheckedOut(true);
                 this.checkedOut.add(book.getCallNumber());
                 this.usrLib.add(book);
+                Resources.setUserBooks(cBooks());
                 return true;
             }
         }
