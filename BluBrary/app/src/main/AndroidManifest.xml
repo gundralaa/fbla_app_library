@@ -22,8 +22,8 @@
         <activity android:name=".BookDisplay" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".UserBooksActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".UserBooksActivity"/>
     </application>
 
 </manifest>
