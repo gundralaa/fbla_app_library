@@ -37,8 +37,8 @@ public class UserBooksActivity extends AppCompatActivity implements BookListAdap
         int bl[] = new int[Resources.getUserBooks().length];
         for (int i = 1; i < bl.length; i++) {
             Log.d("array thing ", String.valueOf(i) + " oh yeah and " + Resources.getUserBooks()[i].getCallNumber());
-            bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber()));
-            Log.d("bli", String.valueOf(bl[i]));
+            bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber())) + 1;
+            Log.d("bli", String.valueOf(bl[i]) + 1);
 
         }
         Resources.setBl(bl);
@@ -46,18 +46,19 @@ public class UserBooksActivity extends AppCompatActivity implements BookListAdap
         mRecyclerView.setAdapter(mBookListAdapter);
 
     }
-
     public void onClick(int position, Book lib[]) {
         Log.d("book click?", "start");
+        Log.d("welp", lib[position].getTitle());
+        Log.d("welp", lib[position].getCallNumber());
+        int help_me = Integer.parseInt(lib[position].getCallNumber());
         Log.d("book click?", String.valueOf(position));
-        currentLib = Resources.getUserBooks();
         Context context = UserBooksActivity.this;
 
         Class destinationActivity = BookDisplay.class;
 
         Intent startChildActivityIntent = new Intent(context, destinationActivity);
         Log.d("blugh", String.valueOf(Resources.getBl()[position]));
-        startChildActivityIntent.putExtra("BookPosition", Resources.getBl()[position]);
+        startChildActivityIntent.putExtra("BookPosition", help_me - 1);
 
         startActivity(startChildActivityIntent);
 

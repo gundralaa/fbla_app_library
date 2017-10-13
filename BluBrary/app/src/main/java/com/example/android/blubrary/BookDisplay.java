@@ -33,7 +33,7 @@ public class BookDisplay extends AppCompatActivity {
             int bookPosition = 3;
             bookPosition = startingIntent.getIntExtra("BookPosition", 0);
             Log.d("bd now", String.valueOf(bookPosition));
-            Book book = lib[bookPosition];
+            Book book = Resources.library[bookPosition];
             String title = book.getTitle();
 
             String author = book.getAuthor();
