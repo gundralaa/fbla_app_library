@@ -6,6 +6,7 @@ package com.example.android.blubrary;
 
 public class Resources {
     public static Book userBooks[];
+    public static int bl[];
     static Book b1 = new Book("1", "999", "Sycamore Row", "John Grisham", "Law/Fiction", "", "");
     static Book b2 = new Book("2", "999", "The Innocent Man", "John Grisham", "Law/Fiction", "", "");
     static Book b3 = new Book("3", "999", "The Litigators", "John Grisham", "Law/Fiction", "", "");
@@ -54,5 +55,13 @@ public class Resources {
 
     public static void setUserBooks(Book[] in) {
         userBooks = in;
+    }
+
+    public static int[] getBl() {
+        return bl;
+    }
+
+    public static void setBl(int[] in) {
+        bl = in;
     }
 }

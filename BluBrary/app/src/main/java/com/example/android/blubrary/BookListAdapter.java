@@ -70,11 +70,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
                     holder.mBookAva.setText("Unavailable");
                 }
 
-                if (usr.has(library[position])[0]) {
-                    holder.mBookAva.setTextColor(Color.BLUE);
-                } else {
-                    holder.mBookAva.setTextColor(Color.RED);
-                }
             }
             else {
                 holder.mBookAva.setText("Available");

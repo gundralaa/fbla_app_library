@@ -1,16 +1,13 @@
 package com.example.android.blubrary;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 public class BookDisplay extends AppCompatActivity {
-
+    Book lib[] = Resources.library;
     TextView mTitleView;
     TextView mAuthorView;
     TextView mGenreView;
@@ -33,9 +30,10 @@ public class BookDisplay extends AppCompatActivity {
         Intent startingIntent = getIntent();
 
         if (startingIntent.hasExtra("BookPosition")) {
-            int bookPosition = startingIntent.getIntExtra("BookPosition", 0);
-
-            Book book = MainActivity.currentLib[bookPosition];
+            int bookPosition = 3;
+            bookPosition = startingIntent.getIntExtra("BookPosition", 0);
+            Log.d("bd now", String.valueOf(bookPosition));
+            Book book = lib[bookPosition];
             String title = book.getTitle();
 
             String author = book.getAuthor();
