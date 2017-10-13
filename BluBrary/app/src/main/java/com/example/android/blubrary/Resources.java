@@ -48,7 +48,7 @@ public class Resources {
     static Book b39 = new Book("39", "999", "Plants of the Pacific Northwest Coast", "Lone Pine", "Botany/Nonfiction", "", "");
     static Book b40 = new Book("40", "999", "Solar Electrity Handbook 2013 Edition", "Micheal Boxwell", "Solar/Nonfiction", "", "");
     public static Book[] library = new Book[]{b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, b22, b23, b24, b25, b26, b27, b28, b29, b30, b31, b32, b33, b34, b35, b36, b37, b38, b39, b40};
-
+    public static User usr;
     public static Book[] getUserBooks() {
         return userBooks;
     }

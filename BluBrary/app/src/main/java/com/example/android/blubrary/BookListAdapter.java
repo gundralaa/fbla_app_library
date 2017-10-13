@@ -36,18 +36,24 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     }
 
     @Override
-    public void onBindViewHolder(BookListViewHolder holder, final int position) {
-        holder.hold.setOnClickListener((new View.OnClickListener() {
+    public void onBindViewHolder(final BookListViewHolder holder, final int position) {
+        holder.hold.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //set reserved
                 usr.reserve(library[position], true);
 
+
             }
-        }));
+        });
         holder.co.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 //set checked out
                 usr.checkOut(library[position], true);
+                holder.hold.setVisibility(View.VISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out, returning in ~ " + library[position].checkTim());
+
 
             }
         }));
@@ -57,21 +63,26 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             holder.mAuthorName.setText(library[position].getAuthor());
             String title = library[position].getTitle();
             if (title.length() > 31) {
-                holder.mBookTitle.setText((title.substring(0,30) + "..."));
+                holder.mBookTitle.setText((title.substring(0, 25) + "..."));
             } else {
                 holder.mBookTitle.setText(library[position].getTitle());
             }
 
             if (library[position].isCheckedOut() || library[position].isReserved()) {
                 if (library[position].isReserved()) {
+                    holder.hold.setVisibility(View.VISIBLE);
+                    holder.co.setVisibility(View.INVISIBLE);
                     holder.mBookAva.setText("Reserved");
-                }
-                else {
-                    holder.mBookAva.setText("Unavailable");
+                } else {
+                    holder.hold.setVisibility(View.VISIBLE);
+                    holder.co.setVisibility(View.INVISIBLE);
+                    holder.mBookAva.setTextColor(Color.RED);
+                    holder.mBookAva.setText("Checked out, returning in ~ " + library[position].checkTim());
                 }
 
-            }
-            else {
+            } else {
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.VISIBLE);
                 holder.mBookAva.setText("Available");
                 holder.mBookAva.setTextColor(Color.GREEN);
             }

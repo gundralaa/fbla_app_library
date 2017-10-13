@@ -33,17 +33,17 @@ class Book {
     // should be called when first adding a book, or when updating the book
     // will overwrite any previous version of the book
     private void saveBook() throws Exception {
-        java.io.File saveFile=null;
-        BufferedWriter writer=null;
-        Scanner counter=null;
-        Scanner reader=null;
+        java.io.File saveFile = null;
+        BufferedWriter writer = null;
+        Scanner counter = null;
+        Scanner reader = null;
         String[] allLines;
         String concatGenres = "";
-        for (int i=0; i<this.genre.length; i++) {
+        for (int i = 0; i < this.genre.length; i++) {
             if (i == this.genre.length - 1) {
-                concatGenres+=this.genre[i];
+                concatGenres += this.genre[i];
             } else {
-                concatGenres+=this.genre[i]+"/";
+                concatGenres += this.genre[i] + "/";
             }
         }
         String thisAsLine = this.callNumber + "#" + this.daysUntilDue + "#" + this.title + "#" + this.author + "#" + concatGenres + "#" + this.pictureFile + "#" + this.shelfNumber;
@@ -51,7 +51,7 @@ class Book {
         saveFile = new java.io.File("BookData.txt");
         counter = new Scanner(saveFile);
         // get line count
-        int lineCount=0;
+        int lineCount = 0;
         while (counter.hasNextLine()) {
             counter.nextLine();
             lineCount++;
@@ -59,11 +59,11 @@ class Book {
         counter.close();
         reader = new Scanner(saveFile);
         allLines = new String[lineCount];
-        for (int i=0; i<lineCount; i++) {
+        for (int i = 0; i < lineCount; i++) {
             allLines[i] = reader.nextLine();
         }
 
-        for (int i=0; i<allLines.length; i++) {
+        for (int i = 0; i < allLines.length; i++) {
             if (allLines[i].split("#")[0].equals(this.callNumber)) {
                 allLines[i] = thisAsLine;
                 exists = true;
@@ -74,7 +74,7 @@ class Book {
         writer = new BufferedWriter(new FileWriter(saveFile));
 
         // write all the old data (or possibly updated) into the file
-        for (int i=0; i<allLines.length; i++) {
+        for (int i = 0; i < allLines.length; i++) {
             writer.write(allLines[i]);
             if (i != allLines.length - 1) {
                 writer.newLine();
@@ -84,15 +84,16 @@ class Book {
         if (!(exists) && allLines.length > 0) {
             writer.newLine();
             writer.write(thisAsLine);
-        } else if(!(exists)) {
+        } else if (!(exists)) {
             writer.write(thisAsLine);
         }
         writer.close();
     }
+
     public boolean isCheckedOut() {
         return this.daysUntilDue <= 20;
     }
-    public boolean isReserved() { return this.daysUntilDue <= 40 && !(this.isCheckedOut());}
+
     public void setCheckedOut(boolean x) {
         if (x) {
             this.daysUntilDue = 20;
@@ -101,6 +102,11 @@ class Book {
         }
         //this.saveBook();
     }
+
+    public boolean isReserved() {
+        return this.daysUntilDue <= 40 && !(this.isCheckedOut());
+    }
+
     public void setReserved(boolean y) {
         if (y) {
             this.daysUntilDue = 40;
@@ -108,22 +114,35 @@ class Book {
             this.daysUntilDue = 999;
         }
     }
+
+    public int checkTim() {
+        return this.daysUntilDue;
+    }
+
     public String getTitle() {
         return this.title;
     }
-    public boolean isOverdue() {return this.daysUntilDue <= 0;}
+
+    public boolean isOverdue() {
+        return this.daysUntilDue <= 0;
+    }
+
     String getAuthor() {
         return this.author;
     }
+
     public String[] getGenres() {
         return this.genre;
     }
+
     public String getCallNumber() {
         return this.callNumber;
     }
+
     public String getPictureFile() {
         return this.pictureFile;
     }
+
     public int getShelfNumber() {
         return this.shelfNumber;
     }
