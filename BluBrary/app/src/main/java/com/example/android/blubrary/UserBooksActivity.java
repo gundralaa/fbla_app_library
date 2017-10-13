@@ -32,20 +32,28 @@ public class UserBooksActivity extends AppCompatActivity implements BookListAdap
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         mRecyclerView.setLayoutManager(layoutManager);
+        Book blankis[] = new Book[0];
 
-        BookListAdapter mBookListAdapter = new BookListAdapter(Resources.getUserBooks(), UserBooksActivity.this, currentUser);//replace Resources.library with Resources.getUserBooks or User.cBooks
-        int bl[] = new int[Resources.getUserBooks().length];
-        for (int i = 1; i < bl.length; i++) {
-            Log.d("array thing ", String.valueOf(i) + " oh yeah and " + Resources.getUserBooks()[i].getCallNumber());
-            bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber())) + 1;
-            Log.d("bli", String.valueOf(bl[i]) + 1);
+        BookListAdapter mBookListAdapter = new BookListAdapter(blankis, UserBooksActivity.this, currentUser);//replace Resources.library with Resources.getUserBooks or User.cBooks
+        if (Resources.getUserBooks() != null) {
+            mBookListAdapter = new BookListAdapter(Resources.getUserBooks(), UserBooksActivity.this, currentUser);//replace Resources.library with Resources.getUserBooks or User.cBooks
 
+
+            int bl[] = new int[Resources.getUserBooks().length];
+            for (int i = 1; i < bl.length; i++) {
+                Log.d("array thing ", String.valueOf(i) + " oh yeah and " + Resources.getUserBooks()[i].getCallNumber());
+                bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber())) + 1;
+                Log.d("bli", String.valueOf(bl[i]) + 1);
+
+            }
+            Resources.setBl(bl);
         }
-        Resources.setBl(bl);
+
 
         mRecyclerView.setAdapter(mBookListAdapter);
 
     }
+
     public void onClick(int position, Book lib[]) {
         Log.d("book click?", "start");
         Log.d("welp", lib[position].getTitle());

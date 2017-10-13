@@ -190,8 +190,8 @@ public class MainActivity extends AppCompatActivity
         Class destinationActivity = BookDisplay.class;
 
         Intent startChildActivityIntent = new Intent(context, destinationActivity);
-
-        startChildActivityIntent.putExtra("BookPosition", position);
+        int help_me = Integer.parseInt(lib[position].getCallNumber()) - 1;
+        startChildActivityIntent.putExtra("BookPosition", help_me);
 
         startActivity(startChildActivityIntent);
 
