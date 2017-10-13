@@ -162,6 +162,9 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_map) {
 
+            Intent startMapActivityIntent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(startMapActivityIntent);
+
         } else if (id == R.id.nav_virtual_map) {
 
         } else if (id == R.id.nav_sign_out) {

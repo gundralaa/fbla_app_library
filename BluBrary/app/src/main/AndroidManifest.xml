@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BookDisplay" />
+        <activity android:name=".MapActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
