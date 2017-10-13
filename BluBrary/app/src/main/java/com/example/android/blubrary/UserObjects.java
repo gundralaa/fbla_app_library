@@ -13,9 +13,9 @@ public class UserObjects {
         String[] c = {};
         String[] cc = {};
         User[] output = {
-                new User("saelanny", "actuallySaeli", a, aa),
-                new User("test", "test", b, bb),
-                new User("pomtree", "MMMMMMM", c, cc)
+                new User(0,"saelanny", "actuallySaeli", a, aa),
+                new User(1,"test", "test", b, bb),
+                new User(2,"pomtree", "MMMMMMM", c, cc)
         };
         return output;
     }

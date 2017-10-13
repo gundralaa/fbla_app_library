@@ -2,6 +2,7 @@ package com.example.android.blubrary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,13 +22,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BookListAdapter.BookListAdapterClickHandler {
 
     public static Book[] library = Resources.library;
     public static Book[] currentLib;
 
-    public User pom = new User("Tom", "1234", new String[0], new String[0]);
+    public User pom = new User(0,"Tom", "1234", new String[0], new String[0]);
     public User [] users = UserObjects.getUsers();
     public User currentUser;
     private RecyclerView mRecyclerView;

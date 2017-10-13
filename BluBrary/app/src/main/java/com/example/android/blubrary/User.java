@@ -7,12 +7,14 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password;
-    private ArrayList<String> reserved;
-    private ArrayList<String> checkedOut;
+    private int id;
+    public ArrayList<String> reserved;
+    public ArrayList<String> checkedOut;
 
-    public User(String username, String password, String[] reserved, String[] checkedOut) {
+    public User(int id, String username, String password, String[] reserved, String[] checkedOut) {
         this.username = username;
         this.password = password;
+        this.id = id;
         this.reserved = new ArrayList<String>();
         this.checkedOut = new ArrayList<String>();
         for (String x: reserved) {
@@ -36,6 +38,7 @@ public class User {
     public String getPassword() {
         return password;
     }
+    public int getId() {return id;}
 
     public String getUsername() {
         return username;
