@@ -3,6 +3,7 @@ package com.example.android.blubrary;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,25 +68,25 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             } else {
                 holder.mBookTitle.setText(library[position].getTitle());
             }
-
-            if (library[position].isCheckedOut() || library[position].isReserved()) {
-                if (library[position].isReserved()) {
-                    holder.hold.setVisibility(View.VISIBLE);
-                    holder.co.setVisibility(View.INVISIBLE);
-                    holder.mBookAva.setText("Reserved");
-                } else {
-                    holder.hold.setVisibility(View.VISIBLE);
-                    holder.co.setVisibility(View.INVISIBLE);
-                    holder.mBookAva.setTextColor(Color.RED);
-                    holder.mBookAva.setText("Checked out, returning in ~ " + library[position].checkTim());
-                }
-
+            Log.d("Book " + library[position].getTitle(), String.valueOf(library[position].isCheckedOut()));
+            if (library[position].isCheckedOut()) {
+                //holder.hold.setVisibility(View.VISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out ETR " + library[position].checkTim() + " days");
             } else {
                 holder.hold.setVisibility(View.INVISIBLE);
                 holder.co.setVisibility(View.VISIBLE);
-                holder.mBookAva.setText("Available");
                 holder.mBookAva.setTextColor(Color.GREEN);
+                holder.mBookAva.setText("Avalibe, ");
             }
+
+        } else {
+            holder.hold.setVisibility(View.INVISIBLE);
+            holder.co.setVisibility(View.VISIBLE);
+            holder.mBookAva.setText("Available");
+            holder.mBookAva.setTextColor(Color.GREEN);
+
 
         }
     }
