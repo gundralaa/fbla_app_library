@@ -1,7 +1,5 @@
 package com.example.android.blubrary;
 
-import android.util.Log;
-
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -20,7 +18,7 @@ public class Sort {
         }
         Arrays.sort(demo);
         for (int i = 0; i < demo.length; i++) {
-            Log.d("please sort", demo[i]);
+            // Log.d("please sort", demo[i]);
         }
         for (int i = 0; i < inLib.length; i++) {
             for (int j = 0; j < inLib.length; j++) {

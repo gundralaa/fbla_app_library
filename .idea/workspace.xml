@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a82737e0-6992-4cb1-8bad-6697a41ae19b" name="Default" comment="" />
+
+    <list default="true" id="a82737e0-6992-4cb1-8bad-6697a41ae19b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BluBrary/.idea/misc.xml" afterPath="$PROJECT_DIR$/BluBrary/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BluBrary/app/src/main/java/com/example/android/blubrary/BookListAdapter.java" afterPath="$PROJECT_DIR$/BluBrary/app/src/main/java/com/example/android/blubrary/BookListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BluBrary/app/src/main/res/layout/book_list_item.xml" afterPath="$PROJECT_DIR$/BluBrary/app/src/main/res/layout/book_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BluBrary/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/BluBrary/app/src/main/res/values/strings.xml" />
+    </list>
+
     <ignored path="fbla_app_library.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -62,14 +70,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
+
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -90,6 +91,16 @@
           </PATH>
         </subPane>
       </pane>
+
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
+
     </panes>
   </component>
   <component name="PropertiesComponent">

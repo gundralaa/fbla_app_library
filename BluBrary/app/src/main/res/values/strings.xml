@@ -20,4 +20,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="search">Search</string>
+    <string name="reserve">Reserve</string>
+    <string name="check_out">Check out</string>
+    <string name="reserve2">Reserve</string>
 </resources>

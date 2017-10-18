@@ -16,15 +16,9 @@ import android.widget.TextView;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
 
+    private final BookListAdapterClickHandler mClickHandler;
     Book library[];
     User usr;
-
-
-    private final BookListAdapterClickHandler mClickHandler;
-
-    public interface BookListAdapterClickHandler {
-        void onClick(int position, Book lib []);
-    }
 
     public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler, User inusr) {
         mClickHandler = clickHandler;
@@ -43,20 +37,24 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     }
 
     @Override
-    public void onBindViewHolder(BookListViewHolder holder, final int position) {
-        holder.hold.setOnClickListener((new View.OnClickListener() {
+    public void onBindViewHolder(final BookListViewHolder holder, final int position) {
+        holder.hold.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("reserve clicked", library[position].getTitle());
                 //set reserved
                 usr.reserve(library[position], true);
 
+
             }
-        }));
+        });
         holder.co.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("check out clicked", library[position].getTitle());
                 //set checked out
                 usr.checkOut(library[position], true);
+                holder.hold.setVisibility(View.VISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out, returning in ~ " + library[position].checkTim());
+
 
             }
         }));
@@ -66,29 +64,29 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             holder.mAuthorName.setText(library[position].getAuthor());
             String title = library[position].getTitle();
             if (title.length() > 31) {
-                holder.mBookTitle.setText((title.substring(0,30) + "..."));
+                holder.mBookTitle.setText((title.substring(0, 25) + "..."));
             } else {
                 holder.mBookTitle.setText(library[position].getTitle());
             }
-
-            if (library[position].isCheckedOut() || library[position].isReserved()) {
-                if (library[position].isReserved()) {
-                    holder.mBookAva.setText("Reserved");
-                }
-                else {
-                    holder.mBookAva.setText("Unavailable");
-                }
-
-                if (usr.has(library[position])[0]) {
-                    holder.mBookAva.setTextColor(Color.BLUE);
-                } else {
-                    holder.mBookAva.setTextColor(Color.RED);
-                }
-            }
-            else {
-                holder.mBookAva.setText("Available");
+            Log.d("Book " + library[position].getTitle(), String.valueOf(library[position].isCheckedOut()));
+            if (library[position].isCheckedOut()) {
+                //holder.hold.setVisibility(View.VISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out ETR " + library[position].checkTim() + " days");
+            } else {
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.VISIBLE);
                 holder.mBookAva.setTextColor(Color.GREEN);
+                holder.mBookAva.setText("Avalibe, ");
             }
+
+        } else {
+            holder.hold.setVisibility(View.INVISIBLE);
+            holder.co.setVisibility(View.VISIBLE);
+            holder.mBookAva.setText("Available");
+            holder.mBookAva.setTextColor(Color.GREEN);
+
 
         }
     }
@@ -97,6 +95,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     public int getItemCount() {
         if (null == library) return 0;
         return library.length;
+    }
+
+    public interface BookListAdapterClickHandler {
+        void onClick(int position, Book lib[]);
     }
 
     class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
