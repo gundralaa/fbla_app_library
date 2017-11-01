@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_virtual_map) {
 
         } else if (id == R.id.nav_sign_out) {
+            Intent signOutActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(signOutActivity);
 
         } else if (id == R.id.nav_books) {
 
@@ -174,6 +176,11 @@ public class MainActivity extends AppCompatActivity
             String username = currentUser.getUsername();
             startBooksActivityIntent.putExtra("Username", username);
             startActivity(startBooksActivityIntent);
+
+        } else if (id == R.id.nav_barcode_scanner){
+
+            Intent startBarcodeActivityIntent = new Intent(MainActivity.this, BarcodeActivity.class);
+            startActivity(startBarcodeActivityIntent);
 
         }
 
