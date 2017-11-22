@@ -11,33 +11,33 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password;
-    private ArrayList<String> reserved;
-    private ArrayList<String> checkedOut;
+    private ArrayList<Book> reserved;
+    private ArrayList<Book> checkedOut;
     private ArrayList<Book> usrLib;
 
     public User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
         this.username = username;
         this.password = password;
-        this.reserved = new ArrayList<String>();
-        this.checkedOut = new ArrayList<String>();
+        this.reserved = new ArrayList<Book>();
+        this.checkedOut = new ArrayList<Book>();
         this.usrLib = new ArrayList<Book>();
-        for (String x: reserved) {
-            this.reserved.add(x);
-        }
-        for (String x: checkedOut) {
-            this.checkedOut.add(x);
-        }
+        //for (String x: reserved) {
+        //    this.reserved.add(x);
+        //}
+        //for (String x: checkedOut) {
+        //    this.checkedOut.add(x);
+        //}
     }
 
-    public String[] getReserved() {
-        String[] output = new String[reserved.size()];
-        int curr = 0;
-        for (String x: reserved) {
-            output[curr] = x;
-            curr++;
-        }
-        return output;
-    }
+    //public String[] getReserved() {
+    //    String[] output = new String[reserved.size()];
+    //    int curr = 0;
+    //    for (String x: reserved) {
+    //        output[curr] = x;
+    //        curr++;
+    //    }
+    //    return output;
+    //}
 
     public String getPassword() {
         return password;
@@ -96,7 +96,7 @@ public class User {
             }
             else {
                 book.setReserved(true);
-                this.reserved.add(book.getCallNumber());
+                this.reserved.add(book);
                 return true;
             }
         }
@@ -113,6 +113,10 @@ public class User {
         }
     }
 
+    public void addToHolds(Book book) {
+        reserved.add(book);
+    }
+
     // will attempt to check a book out or return it... will return true if successful
     public boolean checkOut(Book book, boolean checkingOut) { // checkingOut = true if you want to check out... obvi
         if (checkingOut) {
@@ -122,7 +126,7 @@ public class User {
             }
             else {
                 book.setCheckedOut(true);
-                this.checkedOut.add(book.getCallNumber());
+                this.checkedOut.add(book);
                 this.usrLib.add(book);
                 Resources.setUserBooks(cBooks());
                 return true;

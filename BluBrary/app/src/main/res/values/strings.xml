@@ -4,16 +4,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
 
     <string name="login_welcome">Welcome to BluBrary</string>
     <string name="login_prompt">Sign In Here!</string>
@@ -23,4 +13,5 @@
     <string name="reserve">Reserve</string>
     <string name="check_out">Check out</string>
     <string name="reserve2">Reserve</string>
+    <string name="returnText">Return</string>
 </resources>

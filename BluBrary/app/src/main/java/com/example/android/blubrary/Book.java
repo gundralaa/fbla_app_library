@@ -2,6 +2,7 @@ package com.example.android.blubrary;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Scanner;
  */
 
 class Book {
+    ArrayList<User> held_line = new ArrayList<User>();
     // 14 character call number
     private String callNumber;
     private int daysUntilDue;
@@ -101,6 +103,21 @@ class Book {
             this.daysUntilDue = 999;
         }
         //this.saveBook();
+    }
+
+    public boolean isCheckedOutToUser(User usr) {
+        return usr.has(this)[0] && usr.has(this)[1];
+    }
+
+    public boolean isHeldByUser(User usr) {
+        return usr.has(this)[0] && usr.has(this)[1];
+    }
+
+    public void hold() {
+        if (!held_line.contains(Resources.usr)) {
+            held_line.add(Resources.usr);
+            Resources.usr.addToHolds(this);
+        }
     }
 
     public boolean isReserved() {
