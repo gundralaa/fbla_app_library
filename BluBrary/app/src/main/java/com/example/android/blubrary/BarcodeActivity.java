@@ -120,26 +120,13 @@ public class BarcodeActivity extends AppCompatActivity {
                 RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-                mRecyclerView.setLayoutManager(layoutManager);
+                //mRecyclerView.setLayoutManager(layoutManager);
                 Book blankis[] = new Book[1];
-                blankis[1] = scannedBook;
-                BookListAdapter mBookListAdapter = new BookListAdapter(blankis, BarcodeActivity.this, Resources.usr);//replace Resources.library with Resources.getUserBooks or User.cBooks
-                if (Resources.getUserBooks() != null) {
-                    mBookListAdapter = new BookListAdapter(Resources.getUserBooks(), BarcodeActivity.this, Resources.usr);//replace Resources.library with Resources.getUserBooks or User.cBooks
+                blankis[0] = scannedBook;
 
+                onClick(0, blankis);
 
-                    int bl[] = new int[Resources.getUserBooks().length];
-                    for (int i = 1; i < bl.length; i++) {
-                        Log.d("array thing ", String.valueOf(i) + " oh yeah and " + Resources.getUserBooks()[i].getCallNumber());
-                        bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber())) + 1;
-                        Log.d("bli", String.valueOf(bl[i]) + 1);
-
-                    }
-                    Resources.setBl(bl);
-                }
-
-
-                mRecyclerView.setAdapter(mBookListAdapter);
+                // mRecyclerView.setAdapter(mBookListAdapter);
             }
 
         } else {
@@ -161,7 +148,7 @@ public class BarcodeActivity extends AppCompatActivity {
         Class destinationActivity = BookDisplay.class;
 
         Intent startChildActivityIntent = new Intent(context, destinationActivity);
-        Log.d("blugh", String.valueOf(Resources.getBl()[position]));
+//        Log.d("blugh", String.valueOf(Resources.getBl()[position]));
         startChildActivityIntent.putExtra("BookPosition", help_me - 1);
 
         startActivity(startChildActivityIntent);
