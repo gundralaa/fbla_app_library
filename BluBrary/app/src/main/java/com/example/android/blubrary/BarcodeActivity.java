@@ -3,6 +3,7 @@ package com.example.android.blubrary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -11,15 +12,25 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+/*
+
+I Robbed this code from https://www.spaceotechnologies.com/qr-code-android-using-zxing-library/
+ty for reading my comment
+have a nice day
+
+
+ */
+
 
 public class BarcodeActivity extends AppCompatActivity {
 
-
+    View.OnClickListener vocl;
     private Button scanBtn;
 
     private TextView tvScanFormat, tvScanContent;
 
     private LinearLayout llSearch;
+
 
     @Override
 
@@ -36,13 +47,15 @@ public class BarcodeActivity extends AppCompatActivity {
         tvScanContent = (TextView) findViewById(R.id.tvScanContent);
 
         llSearch = (LinearLayout) findViewById(R.id.llSearch);
+        Log.d("bc1", "starting integrator");
 
         scanBtn.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-
                 llSearch.setVisibility(View.GONE);
 
-                IntentIntegrator integrator = new IntentIntegrator(this);
+                Log.d("bc1", "starting integrator");
+
+                IntentIntegrator integrator = new IntentIntegrator(BarcodeActivity.this);
 
                 integrator.setPrompt("Scan a barcode or QRcode");
 
@@ -69,9 +82,6 @@ public class BarcodeActivity extends AppCompatActivity {
             }
         }));
 
-    }
-
-    public void onClick(View v) {
 
     }
 
