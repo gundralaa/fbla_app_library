@@ -49,7 +49,7 @@ public class BarcodeActivity extends AppCompatActivity {
         llSearch = (LinearLayout) findViewById(R.id.llSearch);
         Log.d("bc1", "starting integrator");
 
-        scanBtn.setOnClickListener((new View.OnClickListener() {
+        scanBtn.setOnClickListener((new View.OnClickListener() {        //this one screws up help (v.2) -Tom
             public void onClick(View v) {
                 llSearch.setVisibility(View.GONE);
 
