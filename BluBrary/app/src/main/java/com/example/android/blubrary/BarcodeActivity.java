@@ -1,8 +1,11 @@
 package com.example.android.blubrary;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,10 @@ I Robbed this code from https://www.spaceotechnologies.com/qr-code-android-using
 ty for reading my comment
 have a nice day
 
+also, here is a gdoc with a bunch of codes coresopding to the Book ID:
+https://docs.google.com/document/d/19sNX5x3OMO7xnObpW-mYCw2WeevsOkk7Jh_5dJHRNso/edit?usp=sharing
+
+
 
  */
 
@@ -25,12 +32,11 @@ have a nice day
 public class BarcodeActivity extends AppCompatActivity {
 
     View.OnClickListener vocl;
+    Book scannedBook;
+    String id;
     private Button scanBtn;
-
     private TextView tvScanFormat, tvScanContent;
-
     private LinearLayout llSearch;
-
 
     @Override
 
@@ -105,8 +111,35 @@ public class BarcodeActivity extends AppCompatActivity {
 
                 tvScanContent.setText(result.getContents());
 
-                tvScanFormat.setText(result.getFormatName());
+                id = result.getContents();
+                scannedBook = Search.getBookByID(id);
+                Log.d("booK FOUND", scannedBook.getTitle());
+                tvScanFormat.setText(scannedBook.getTitle());
+                Log.d("work you piece of shit", Resources.usr.getUsername());
+//        Log.d("work you piece of shit", String.valueOf(Resources.getUserBooks().length));
+                RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
+                mRecyclerView.setLayoutManager(layoutManager);
+                Book blankis[] = new Book[1];
+                blankis[1] = scannedBook;
+                BookListAdapter mBookListAdapter = new BookListAdapter(blankis, BarcodeActivity.this, Resources.usr);//replace Resources.library with Resources.getUserBooks or User.cBooks
+                if (Resources.getUserBooks() != null) {
+                    mBookListAdapter = new BookListAdapter(Resources.getUserBooks(), BarcodeActivity.this, Resources.usr);//replace Resources.library with Resources.getUserBooks or User.cBooks
+
+
+                    int bl[] = new int[Resources.getUserBooks().length];
+                    for (int i = 1; i < bl.length; i++) {
+                        Log.d("array thing ", String.valueOf(i) + " oh yeah and " + Resources.getUserBooks()[i].getCallNumber());
+                        bl[i] = Integer.parseInt((Resources.getUserBooks()[i].getCallNumber())) + 1;
+                        Log.d("bli", String.valueOf(bl[i]) + 1);
+
+                    }
+                    Resources.setBl(bl);
+                }
+
+
+                mRecyclerView.setAdapter(mBookListAdapter);
             }
 
         } else {
@@ -114,6 +147,24 @@ public class BarcodeActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
 
         }
+
+    }
+
+    public void onClick(int position, Book lib[]) {
+        Log.d("book click?", "start");
+        Log.d("welp", lib[position].getTitle());
+        Log.d("welp", lib[position].getCallNumber());
+        int help_me = Integer.parseInt(lib[position].getCallNumber());
+        Log.d("book click?", String.valueOf(position));
+        Context context = BarcodeActivity.this;
+
+        Class destinationActivity = BookDisplay.class;
+
+        Intent startChildActivityIntent = new Intent(context, destinationActivity);
+        Log.d("blugh", String.valueOf(Resources.getBl()[position]));
+        startChildActivityIntent.putExtra("BookPosition", help_me - 1);
+
+        startActivity(startChildActivityIntent);
 
     }
 

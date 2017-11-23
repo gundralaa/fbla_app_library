@@ -34,4 +34,12 @@ public class Search {
 
     }
 
+    public static Book getBookByID(String id) {
+        for (Book aLibrary : Resources.library) {
+            if (aLibrary.getCallNumber().equals(id)) return aLibrary;
+
+        }
+        return null;
+    }
+
 }
