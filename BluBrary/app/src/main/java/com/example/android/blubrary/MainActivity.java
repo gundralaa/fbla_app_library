@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     public static Book[] currentLib;
     //private static BookListAdapter mBookListAdapter;
     public Book blanks[] = new Book[0];
-    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
+    public User pom = new User(9,"Tom", "1234", new String[0], new String[0], blanks);
     public User[] users = UserObjects.getUsers();
     public static User currentUser;
     public static RecyclerView mRecyclerView;

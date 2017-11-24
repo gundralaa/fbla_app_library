@@ -102,7 +102,7 @@ public class NetworkUtils{
             lib[i] = new Book(id,daysTillDue,title,author,genre,"",shelfNumber);
             for (User user: users){
                 if (user.getId() == Integer.parseInt(userId)){
-                    user.checkedOut.add(id);
+                    //user.checkOut(lib[i],true);
                 }
             }
 

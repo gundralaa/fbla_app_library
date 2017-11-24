@@ -11,22 +11,18 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password;
+    private int id;
     private ArrayList<Book> reserved;
     private ArrayList<Book> checkedOut;
     private ArrayList<Book> usrLib;
 
-    public User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
+    public User(int id, String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
         this.username = username;
         this.password = password;
         this.reserved = new ArrayList<Book>();
         this.checkedOut = new ArrayList<Book>();
         this.usrLib = new ArrayList<Book>();
-        for (String x: reserved) {
-            this.reserved.add(x);
-        }
-        for (String x: checkedOut) {
-            this.checkedOut.add(x);
-        }
+        this.id = id;
     }
 
     //public String[] getReserved() {
