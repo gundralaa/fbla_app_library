@@ -14,4 +14,6 @@
     <string name="check_out">Check out</string>
     <string name="reserve2">Reserve</string>
     <string name="returnText">Return</string>
+    <string name="scan">Scan</string>
+
 </resources>
