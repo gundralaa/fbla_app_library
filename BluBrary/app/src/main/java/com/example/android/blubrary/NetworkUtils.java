@@ -21,12 +21,9 @@ import java.util.Scanner;
 
 public class NetworkUtils{
 
-    public static final String GET_BOOKS_URL = "http://ec2-52-53-211-24.us-west-1.compute.amazonaws.com/getAllBooks.php";
+    public static final String GET_BOOKS_URL = "http://ec2-54-193-58-112.us-west-1.compute.amazonaws.com/getAllBooks.php";
 
     public static URL makeUrls(String urlString) {
-
-
-
         URL url = null;
         try {
             url = new URL(urlString);
@@ -42,7 +39,7 @@ public class NetworkUtils{
 
             InputStream in = urlConnection.getInputStream();
             Scanner sc = new Scanner(in);
-            sc.delimiter();
+            sc.useDelimiter("\\A");
             if(sc.hasNext()){
                 return sc.next();
             }
@@ -87,8 +84,7 @@ public class NetworkUtils{
 
     public static Book[] jsonBookParser(String jsonIn) throws JSONException{
         User[] users = UserObjects.getUsers();
-        JSONObject reader = new JSONObject(jsonIn);
-        JSONArray books = reader.getJSONArray("");
+        JSONArray books = new JSONArray(jsonIn);
 
         Book[] lib = new Book[books.length()];
 
@@ -101,11 +97,11 @@ public class NetworkUtils{
             String genre = book.getString("genre");
             String daysTillDue = book.getString("daysTillDue");
             String userId = book.getString("userId");
-            String shelfNumber = book.getString("shelfNumber");
+            String shelfNumber = book.getString("callNumber");
 
             lib[i] = new Book(id,daysTillDue,title,author,genre,"",shelfNumber);
             for (User user: users){
-                if (user.getId() == Integer.getInteger(userId)){
+                if (user.getId() == Integer.parseInt(userId)){
                     user.checkedOut.add(id);
                 }
             }
