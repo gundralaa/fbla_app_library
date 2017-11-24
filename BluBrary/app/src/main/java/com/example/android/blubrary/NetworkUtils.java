@@ -98,6 +98,9 @@ public class NetworkUtils{
             String daysTillDue = book.getString("daysTillDue");
             String userId = book.getString("userId");
             String shelfNumber = book.getString("callNumber");
+            if(daysTillDue.equals("0")){
+                daysTillDue = "999";
+            }
 
             lib[i] = new Book(id,daysTillDue,title,author,genre,"",shelfNumber);
             for (User user: users){

@@ -93,7 +93,7 @@ class Book {
     }
 
     public boolean isCheckedOut() {
-        return this.daysUntilDue <= 20 && this.daysUntilDue != 0;
+        return this.daysUntilDue <= 20;
     }
 
     public void setCheckedOut(boolean x) {
