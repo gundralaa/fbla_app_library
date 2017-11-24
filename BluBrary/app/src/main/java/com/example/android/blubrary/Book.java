@@ -32,6 +32,14 @@ class Book {
         //this.shelfNumber = Integer.parseInt(sn);
     }
 
+    public static Book[] arrayListToArray(ArrayList arrayList) {
+        Book[] bookArr = new Book[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            bookArr[i] = (Book) arrayList.get(i);
+        }
+        return bookArr;
+    }
+
     // should be called when first adding a book, or when updating the book
     // will overwrite any previous version of the book
     private void saveBook() throws Exception {

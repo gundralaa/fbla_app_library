@@ -61,6 +61,24 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             }
         }));
 
+        holder.returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                usr.returnBook(library[position]);
+                if (library[position].held_line.size() == 0) {
+                    holder.hold.setVisibility(View.INVISIBLE);
+                    holder.co.setVisibility(View.VISIBLE);
+                    holder.returnButton.setVisibility((View.INVISIBLE));
+                    holder.mBookAva.setTextColor(Color.GREEN);
+                    holder.mBookAva.setText("Avalible in Library now");
+                } else {
+
+                }
+
+
+            }
+        });
+
         //get data to set color and things
         if (library[position] != null) {
             holder.mAuthorName.setText(library[position].getAuthor());
@@ -95,7 +113,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
                 holder.returnButton.setVisibility((View.INVISIBLE));
                 holder.mBookAva.setTextColor(Color.GREEN);
                 holder.mBookAva.setText("Avalible in Library now");
-
             }
 
         } else {

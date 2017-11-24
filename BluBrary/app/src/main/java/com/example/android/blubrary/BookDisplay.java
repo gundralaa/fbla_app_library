@@ -76,6 +76,9 @@ public class BookDisplay extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         user.returnBook(book);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        startActivity(startMainActivityIntent);
+
                     }
                 });
             } else if (book.isCheckedOut()) {
@@ -84,6 +87,8 @@ public class BookDisplay extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         user.addToHolds(book);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        startActivity(startMainActivityIntent);
                     }
                 });
             } else {
@@ -92,6 +97,8 @@ public class BookDisplay extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         user.checkOut(book, true);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        startActivity(startMainActivityIntent);
                     }
                 });
             }

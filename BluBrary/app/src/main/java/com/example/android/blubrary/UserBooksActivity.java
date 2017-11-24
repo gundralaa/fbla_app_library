@@ -23,11 +23,10 @@ public class UserBooksActivity extends AppCompatActivity implements BookListAdap
             for (User user : users) {
                 if (user.getUsername().equals(username)) {
                     currentUser = user;
+                    break;
                 }
             }
         }
-        Log.d("work you piece of shit", currentUser.getUsername());
-//        Log.d("work you piece of shit", String.valueOf(Resources.getUserBooks().length));
         RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 

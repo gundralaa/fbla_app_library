@@ -13,14 +13,12 @@ public class User {
     private String password;
     private ArrayList<Book> reserved;
     private ArrayList<Book> checkedOut;
-    private ArrayList<Book> usrLib;
 
-    User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
+    User(String username, String password, String[] reserved, Book[] usrLib) {
         this.username = username;
         this.password = password;
         this.reserved = new ArrayList<>();
-        this.checkedOut = new ArrayList<>();
-        this.usrLib = new ArrayList<>();
+        this.checkedOut = new ArrayList<Book>();
         //for (String x: reserved) {
         //    this.reserved.add(x);
         //}
@@ -57,11 +55,11 @@ public class User {
     }
 
     public Book[] cBooks() {
-        Book[] outBook = new Book[usrLib.size()];
-        for (int i = 0; i < usrLib.size(); i++) {
-            outBook[i] = usrLib.get(i);
+        Book[] outBook = new Book[checkedOut.size()];
+        for (int i = 0; i < checkedOut.size(); i++) {
+            outBook[i] = checkedOut.get(i);
             Log.d("outBook:", outBook[i].getTitle());
-            Log.d("UsrLib:", usrLib.get(i).getTitle());
+            Log.d("checkedOut:", checkedOut.get(i).getTitle());
         }
         Log.d("POS", String.valueOf(outBook.length));
         Log.d("POS", this.getUsername());
@@ -88,7 +86,9 @@ public class User {
     public void returnBook(Book book) {
         for (int i = 0; i < checkedOut.size(); i++) {
             if (checkedOut.get(i).equals(book)) {
+                checkedOut.get(i).setCheckedOut(false);
                 checkedOut.remove(i);
+                Resources.setUserBooks(Book.arrayListToArray(checkedOut));
                 break;
             }
         }
@@ -143,8 +143,8 @@ public class User {
             } else {
                 book.setCheckedOut(true);
                 this.checkedOut.add(book);
-                this.usrLib.add(book);
                 Resources.setUserBooks(cBooks());
+
                 return true;
             }
         } else {

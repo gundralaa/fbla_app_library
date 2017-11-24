@@ -14,9 +14,9 @@ public class UserObjects {
         String[] cc = {};
         Book[] blanks = {};
         return new User[]{
-                new User("saelanny", "actuallySaeli", a, aa, blanks),
-                new User("test", "test", b, bb, blanks),
-                new User("pomtree", "MMMMMMM", c, cc, blanks),
+                new User("saelanny", "actuallySaeli", a, blanks),
+                new User("test", "test", b, blanks),
+                new User("pomtree", "MMMMMMM", c, blanks),
 
         };
     }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     public static EditText genreIn;
     //private static BookListAdapter mBookListAdapter;
     public Book blanks[] = new Book[0];
-    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
+    public User pom = new User("Tom", "1234", new String[0], blanks);
     public User[] users = UserObjects.getUsers();
     public Spinner sortBy;
 
@@ -55,9 +55,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         titleIn = (EditText) findViewById(R.id.intxt);
         authorIn = (EditText) findViewById(R.id.inauth);
