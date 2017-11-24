@@ -17,7 +17,6 @@ public class UserObjects {
                 new User("saelanny", "actuallySaeli", a, aa, blanks),
                 new User("test", "test", b, bb, blanks),
                 new User("pomtree", "MMMMMMM", c, cc, blanks),
-
         };
     }
 }

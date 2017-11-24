@@ -21,12 +21,12 @@ public class User {
         this.reserved = new ArrayList<Book>();
         this.checkedOut = new ArrayList<Book>();
         this.usrLib = new ArrayList<Book>();
-        //for (String x: reserved) {
-        //    this.reserved.add(x);
-        //}
-        //for (String x: checkedOut) {
-        //    this.checkedOut.add(x);
-        //}
+        for (String x: reserved) {
+            this.reserved.add(x);
+        }
+        for (String x: checkedOut) {
+            this.checkedOut.add(x);
+        }
     }
 
     //public String[] getReserved() {
@@ -42,6 +42,7 @@ public class User {
     public String getPassword() {
         return password;
     }
+    public int getId() {return id;}
 
     public String getUsername() {
         return username;
