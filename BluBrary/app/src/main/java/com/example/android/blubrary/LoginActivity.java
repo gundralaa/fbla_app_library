@@ -2,12 +2,15 @@ package com.example.android.blubrary;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         em = (TextView) findViewById(R.id.errorM);
         em.setVisibility(View.INVISIBLE);
         loginButton = (Button) findViewById(R.id.login_button);
+
+        new GetLibraryData().execute();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +65,37 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         return null;
+    }
+
+    public class GetLibraryData extends AsyncTask<Void, Void, Book[]> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Book[] doInBackground(Void... nothing) {
+            URL url = NetworkUtils.makeUrls(NetworkUtils.GET_BOOKS_URL);
+
+            try {
+                String jsonBooks = NetworkUtils.getDataFromNetworkHTTP(url);
+                Book[] lib = NetworkUtils.jsonBookParser(jsonBooks);
+
+                return lib;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Book[] lib) {
+            if(lib != null){
+                Resources.library = lib;
+            }
+        }
     }
 
 
