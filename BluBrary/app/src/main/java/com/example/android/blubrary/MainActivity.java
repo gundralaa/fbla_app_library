@@ -76,12 +76,10 @@ public class MainActivity extends AppCompatActivity
                     mRecyclerView.setAdapter(mBookListAdapter);
                     titleIn.setVisibility(View.GONE);
                     authorIn.setVisibility(View.GONE);
-                    genreIn.setVisibility(View.GONE);
                     searchButton.setText("Search Again");
                 } else {
                     titleIn.setVisibility(View.VISIBLE);
                     authorIn.setVisibility(View.VISIBLE);
-                    genreIn.setVisibility(View.VISIBLE);
                     searchButton.setText("Search");
                 }
 
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         }
-            Resources.usr = currentUser;
+        Resources.usr = currentUser;
     }
 
     @Override
@@ -174,7 +172,14 @@ public class MainActivity extends AppCompatActivity
             startBooksActivityIntent.putExtra("Username", username);
             startActivity(startBooksActivityIntent);
 
-        } else if (id == R.id.nav_barcode_scanner){
+        } else if (id == R.id.nav_holds) {
+
+            Intent startHoldsActivityIntent = new Intent(MainActivity.this, UserHoldsActivity.class);
+            String username = currentUser.getUsername();
+            startHoldsActivityIntent.putExtra("Username", username);
+            startActivity(startHoldsActivityIntent);
+
+        } else if (id == R.id.nav_barcode_scanner) {
 
             Intent startBarcodeActivityIntent = new Intent(MainActivity.this, BarcodeActivity.class);
             startActivity(startBarcodeActivityIntent);

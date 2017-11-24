@@ -92,7 +92,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             if (library[position].isCheckedOutToUser(Resources.usr)) {
                 holder.hold.setVisibility(View.INVISIBLE);
                 holder.co.setVisibility(View.INVISIBLE);
-                holder.returnButton.setVisibility(View.VISIBLE);
+                holder.returnButton.setVisibility(View.INVISIBLE);
                 holder.mBookAva.setTextColor(Color.RED);
                 holder.mBookAva.setText("Your expected to return this book in " + library[position].checkTim() + " days");
             } else if (library[position].isHeldByUser(Resources.usr)) {

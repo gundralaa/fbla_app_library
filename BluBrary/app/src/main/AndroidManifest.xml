@@ -35,6 +35,7 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UserBooksActivity" />
+        <activity android:name=".UserHoldsActivity" />
         <activity android:name=".BarcodeActivity"></activity>
     </application>
 

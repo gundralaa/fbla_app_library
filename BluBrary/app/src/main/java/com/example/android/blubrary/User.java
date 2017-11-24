@@ -127,11 +127,13 @@ public class User {
     }
 
     public Book[] getUserHolds() {
-        return (Book[]) reserved.toArray();
+        return Book.arrayListToArray(reserved);
     }
 
     public void addToHolds(Book book) {
-        reserved.add(book);
+        if (!reserved.contains(book)) {
+            reserved.add(book);
+        }
     }
 
     // will attempt to check a book out or return it... will return true if successful

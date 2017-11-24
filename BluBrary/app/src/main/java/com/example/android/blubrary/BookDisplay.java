@@ -97,13 +97,11 @@ public class BookDisplay extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         user.checkOut(book, true);
-                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, UserBooksActivity.class);
                         startActivity(startMainActivityIntent);
                     }
                 });
             }
-
-
         }
 
     }
