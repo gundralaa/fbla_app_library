@@ -16,5 +16,6 @@
     <string name="returnText">Return</string>
     <string name="scan">Scan</string>
     <string name="author">Author</string>
+    <string name="back">Back to main menu</string>
 
 </resources>

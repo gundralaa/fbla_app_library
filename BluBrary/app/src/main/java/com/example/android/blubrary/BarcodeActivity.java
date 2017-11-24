@@ -113,28 +113,26 @@ public class BarcodeActivity extends AppCompatActivity {
 
                 id = result.getContents();
                 scannedBook = Search.getBookByID(id);
-                Log.d("booK FOUND", scannedBook.getTitle());
-                tvScanFormat.setText(scannedBook.getTitle());
-                Log.d("work you piece of shit", Resources.usr.getUsername());
-//        Log.d("work you piece of shit", String.valueOf(Resources.getUserBooks().length));
-                RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+                if (scannedBook != null) {
+                    Log.d("booK FOUND", scannedBook.getTitle());
+                    tvScanFormat.setText(scannedBook.getTitle());
+                    Log.d("work you piece of shit", Resources.usr.getUsername());
+                    RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books_user);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-                //mRecyclerView.setLayoutManager(layoutManager);
-                Book blankis[] = new Book[1];
-                blankis[0] = scannedBook;
+                    Book blankis[] = new Book[1];
+                    blankis[0] = scannedBook;
 
-                onClick(scannedBook);
+                    onClick(scannedBook);
 
-                // mRecyclerView.setAdapter(mBookListAdapter);
+
+                } else {
+
+                    super.onActivityResult(requestCode, resultCode, data);
+
+                }
             }
-
-        } else {
-
-            super.onActivityResult(requestCode, resultCode, data);
-
         }
-
     }
 
     public void onClick(Book lib) {
@@ -148,7 +146,6 @@ public class BarcodeActivity extends AppCompatActivity {
         Class destinationActivity = BookDisplay.class;
 
         Intent startChildActivityIntent = new Intent(context, destinationActivity);
-//        Log.d("blugh", String.valueOf(Resources.getBl()[position]));
         startChildActivityIntent.putExtra("BookPosition", help_me - 1);
 
         startActivity(startChildActivityIntent);

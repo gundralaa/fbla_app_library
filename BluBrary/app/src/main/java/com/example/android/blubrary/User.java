@@ -1,7 +1,5 @@
 package com.example.android.blubrary;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
@@ -9,10 +7,10 @@ import java.util.ArrayList;
  */
 
 public class User {
+    public ArrayList<Book> reserved;
+    public ArrayList<Book> checkedOut;
     private String username;
     private String password;
-    private ArrayList<Book> reserved;
-    private ArrayList<Book> checkedOut;
 
     User(String username, String password, String[] reserved, Book[] usrLib) {
         this.username = username;
@@ -49,7 +47,7 @@ public class User {
         String output = "X";
         for (int i = 0; i < checkedOut.size(); i++) {
             output += checkedOut.get(i) + "X";
-            Log.d("oupt", output);
+            // Log.d("oupt", output);
         }
         return output;
     }
@@ -58,11 +56,11 @@ public class User {
         Book[] outBook = new Book[checkedOut.size()];
         for (int i = 0; i < checkedOut.size(); i++) {
             outBook[i] = checkedOut.get(i);
-            Log.d("outBook:", outBook[i].getTitle());
-            Log.d("checkedOut:", checkedOut.get(i).getTitle());
+            // Log.d("outBook:", outBook[i].getTitle());
+            // Log.d("checkedOut:", checkedOut.get(i).getTitle());
         }
-        Log.d("POS", String.valueOf(outBook.length));
-        Log.d("POS", this.getUsername());
+        //  Log.d("POS", String.valueOf(outBook.length));
+        // Log.d("POS", this.getUsername());
         Resources.setUserBooks(outBook);
         return outBook;
     }
@@ -97,7 +95,10 @@ public class User {
     public void cancelHoldBook(Book book) {
         for (int i = 0; i < checkedOut.size(); i++) {
             if (reserved.get(i).equals(book)) {
+                reserved.get(i).held_line.remove(this);
+
                 reserved.remove(i);
+
                 break;
             }
         }

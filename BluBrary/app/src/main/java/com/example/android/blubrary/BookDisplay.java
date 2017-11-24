@@ -3,7 +3,6 @@ package com.example.android.blubrary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -35,7 +34,7 @@ public class BookDisplay extends AppCompatActivity {
         if (startingIntent.hasExtra("BookPosition")) {
             int bookPosition;
             bookPosition = startingIntent.getIntExtra("BookPosition", 0);
-            Log.d("bd now", String.valueOf(bookPosition));
+            //  Log.d("bd now", String.valueOf(bookPosition));
             final Book book = Resources.library[bookPosition];
             String title = book.getTitle();
 
@@ -68,9 +67,9 @@ public class BookDisplay extends AppCompatActivity {
 
             }
 
-            Log.d("Filtering for buttons", "about to check isChecked out to uder");
+            //  Log.d("Filtering for buttons", "about to check isChecked out to uder");
 
-            if (book.isCheckedOutToUser(Resources.usr)) {
+            if (user.checkedOut.contains(book)) {
                 action.setText("Return");
                 action.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -81,13 +80,27 @@ public class BookDisplay extends AppCompatActivity {
 
                     }
                 });
+
+
+            } else if (user.reserved.contains(book)) {
+
+                action.setText("Cancel Hold");
+                action.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        user.cancelHoldBook(book);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        startActivity(startMainActivityIntent);
+                    }
+                });
+
             } else if (book.isCheckedOut()) {
                 action.setText("Hold");
                 action.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         user.addToHolds(book);
-                        Intent startMainActivityIntent = new Intent(BookDisplay.this, MainActivity.class);
+                        Intent startMainActivityIntent = new Intent(BookDisplay.this, UserHoldsActivity.class);
                         startActivity(startMainActivityIntent);
                     }
                 });
