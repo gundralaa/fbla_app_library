@@ -6,91 +6,115 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="com.example.android.blubrary.BookDisplay">
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#AEC0C8">
+        android:background="#AEC0C8"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_book_name_more"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:textColor="#0277BD"
+            android:textSize="32sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/tv_book_name_more"
-            android:textSize="32sp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/tv_book_author_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:textColor="#29434E"
-            android:layout_marginTop="3dp"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_name_more"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:id="@+id/tv_book_genre_more"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_author_more"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:id="@+id/tv_book_callNum_more"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_genre_more"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:id="@+id/tv_book_shelfNum_more"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_callNum_more"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_map"
-            android:text="View On Map"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_book_shelfNum_more" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_name_more" />
+
+        <TextView
+            android:id="@+id/tv_book_genre_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="3dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_author_more" />
+
+        <TextView
+            android:id="@+id/tv_book_callNum_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="1dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_genre_more" />
+
+        <TextView
+            android:id="@+id/tv_book_shelfNum_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="1dp"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_callNum_more" />
+
+        <LinearLayout
+            android:id="@+id/llout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_shelfNum_more">
+
+
+            <Button
+                android:id="@+id/action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:text="View On Map"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_book_shelfNum_more" />
+
+        </LinearLayout>
+
         <ImageView
+            android:id="@+id/tv_book_cover_art"
             android:layout_width="match_parent"
             android:layout_height="340dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/test_cover"
             android:scaleType="centerCrop"
-            android:id="@+id/tv_book_cover_art"
-            app:layout_constraintTop_toBottomOf="@+id/button_map"
+            android:src="@drawable/test_cover"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/llout" />
 
     </android.support.constraint.ConstraintLayout>
 

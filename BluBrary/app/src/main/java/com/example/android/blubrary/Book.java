@@ -106,7 +106,10 @@ class Book {
     }
 
     public boolean isCheckedOutToUser(User usr) {
-        return usr.has(this)[0] && usr.has(this)[1];
+        for (int i = 0; i < usr.cBooks().length; i++) {
+            if (usr.cBooks()[i].equals(this)) return true;
+        }
+        return false;
     }
 
     public boolean isHeldByUser(User usr) {

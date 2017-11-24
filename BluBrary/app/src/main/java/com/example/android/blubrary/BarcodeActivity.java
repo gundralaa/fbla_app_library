@@ -21,7 +21,7 @@ I Robbed this code from https://www.spaceotechnologies.com/qr-code-android-using
 ty for reading my comment
 have a nice day
 
-also, here is a gdoc with a bunch of codes coresopding to the Book ID:
+also, here is a gdoc with a bunch of codes coresopding to the Book ID: (hold Ctrl to open link directly)
 https://docs.google.com/document/d/19sNX5x3OMO7xnObpW-mYCw2WeevsOkk7Jh_5dJHRNso/edit?usp=sharing
 
 
@@ -124,7 +124,7 @@ public class BarcodeActivity extends AppCompatActivity {
                 Book blankis[] = new Book[1];
                 blankis[0] = scannedBook;
 
-                onClick(0, blankis);
+                onClick(scannedBook);
 
                 // mRecyclerView.setAdapter(mBookListAdapter);
             }
@@ -137,12 +137,12 @@ public class BarcodeActivity extends AppCompatActivity {
 
     }
 
-    public void onClick(int position, Book lib[]) {
+    public void onClick(Book lib) {
         Log.d("book click?", "start");
-        Log.d("welp", lib[position].getTitle());
-        Log.d("welp", lib[position].getCallNumber());
-        int help_me = Integer.parseInt(lib[position].getCallNumber());
-        Log.d("book click?", String.valueOf(position));
+        Log.d("welp", lib.getTitle());
+        Log.d("welp", lib.getCallNumber());
+        int help_me = Integer.parseInt(lib.getCallNumber());
+        Log.d("book click?", String.valueOf(0));
         Context context = BarcodeActivity.this;
 
         Class destinationActivity = BookDisplay.class;

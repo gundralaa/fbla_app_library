@@ -5,7 +5,9 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
+ *
  * Created by saeli on 9/29/2017.
+ *
  */
 
 public class User {
@@ -15,12 +17,12 @@ public class User {
     private ArrayList<Book> checkedOut;
     private ArrayList<Book> usrLib;
 
-    public User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
+    User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
         this.username = username;
         this.password = password;
-        this.reserved = new ArrayList<Book>();
-        this.checkedOut = new ArrayList<Book>();
-        this.usrLib = new ArrayList<Book>();
+        this.reserved = new ArrayList<>();
+        this.checkedOut = new ArrayList<>();
+        this.usrLib = new ArrayList<>();
         //for (String x: reserved) {
         //    this.reserved.add(x);
         //}
@@ -39,11 +41,11 @@ public class User {
     //    return output;
     //}
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
@@ -87,6 +89,14 @@ public class User {
         }
     }
 
+    public void returnBook(Book book) {
+        for (int i = 0; i < checkedOut.size(); i++) {
+            if (checkedOut.get(i).equals(book)) {
+                checkedOut.remove(i);
+                break;
+            }
+        }
+    }
     // will attempt to reserve/unreserve a book for a user, will return true if successful, false if failed (book already reserved or unreserved)
     public boolean reserve(Book book, boolean reserving) { // if true, you are reserving, if false, you are unreserving
         if (reserving) {
