@@ -7,20 +7,17 @@ import java.util.ArrayList;
  * made with love
  */
 public class Search {
-    public static Book[] search(Book[] library, String searched_title, String searched_author, String searched_genre) {
+    public static Book[] search(Book[] library, String searched_title, String searched_author) {
         ArrayList<Book> tempReturn = new ArrayList<>();
         searched_author = searched_author.toUpperCase();
         searched_title = searched_title.toUpperCase();
-        searched_genre = searched_genre.toUpperCase();
         StringBuilder g;
         int i1 = 0;
         while (i1 < library.length) {
             Book aLibrary = library[i1];
             g = new StringBuilder();
-            for (int i = 0; i < aLibrary.getGenres().length; i++) {
-                g.append(aLibrary.getGenres()[i]);
-            }
-            if (aLibrary.getTitle().toUpperCase().contains(searched_title) && aLibrary.getAuthor().toUpperCase().contains(searched_author) && g.toString().toUpperCase().contains(searched_genre)) {
+
+            if (aLibrary.getTitle().toUpperCase().contains(searched_title) && aLibrary.getAuthor().toUpperCase().contains(searched_author)) {
                 tempReturn.add(aLibrary);
             }
             i1++;

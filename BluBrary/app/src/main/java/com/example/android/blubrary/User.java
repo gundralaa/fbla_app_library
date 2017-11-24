@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- * Created by saeli on 9/29/2017.
+ * Created by saeli on 9/29/2017. <3
  */
 
 public class User {

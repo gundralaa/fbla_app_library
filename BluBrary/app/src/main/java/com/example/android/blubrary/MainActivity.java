@@ -26,16 +26,16 @@ public class MainActivity extends AppCompatActivity
 
     public static Book[] library = Resources.library;
     public static Book[] currentLib;
-    //private static BookListAdapter mBookListAdapter;
-    public Book blanks[] = new Book[0];
-    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
-    public User[] users = UserObjects.getUsers();
     public static User currentUser;
     public static RecyclerView mRecyclerView;
     public static BookListAdapter mBookListAdapter;
     public static EditText titleIn;
     public static EditText authorIn;
     public static EditText genreIn;
+    //private static BookListAdapter mBookListAdapter;
+    public Book blanks[] = new Book[0];
+    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
+    public User[] users = UserObjects.getUsers();
     public Spinner sortBy;
 
 
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(layoutManager);
         titleIn = (EditText) findViewById(R.id.intxt);
         authorIn = (EditText) findViewById(R.id.inauth);
-        genreIn = (EditText) findViewById(R.id.ingenre);
         mRecyclerView.setAdapter(mBookListAdapter);
         final Button searchButton = (Button) findViewById(R.id.searchB);
         Button buttonReserve = (Button) findViewById(R.id.button_checkout);
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity
                 if (titleIn.getVisibility() == View.VISIBLE) {
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, currentUser);
+                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString()), MainActivity.this, currentUser);
                     mRecyclerView.setAdapter(mBookListAdapter);
                     titleIn.setVisibility(View.GONE);
                     authorIn.setVisibility(View.GONE);
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (sortBy.getSelectedItemPosition() == 0) library = Sort.sortByTitle(library);
                 else if (sortBy.getSelectedItemPosition() == 1) library = Sort.sortByAuth(library);
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, currentUser);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString()), MainActivity.this, currentUser);
                 mRecyclerView.setAdapter(mBookListAdapter);
 
             }
