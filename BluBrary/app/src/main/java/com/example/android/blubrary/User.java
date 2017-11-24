@@ -1,5 +1,9 @@
 package com.example.android.blubrary;
+
+import android.util.Log;
+
 import java.util.ArrayList;
+
 /**
  * Created by saeli on 9/29/2017.
  */
@@ -7,16 +11,16 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password;
-    private int id;
-    public ArrayList<String> reserved;
-    public ArrayList<String> checkedOut;
+    private ArrayList<Book> reserved;
+    private ArrayList<Book> checkedOut;
+    private ArrayList<Book> usrLib;
 
-    public User(int id, String username, String password, String[] reserved, String[] checkedOut) {
+    public User(String username, String password, String[] reserved, String[] checkedOut, Book[] usrLib) {
         this.username = username;
         this.password = password;
-        this.id = id;
-        this.reserved = new ArrayList<String>();
-        this.checkedOut = new ArrayList<String>();
+        this.reserved = new ArrayList<Book>();
+        this.checkedOut = new ArrayList<Book>();
+        this.usrLib = new ArrayList<Book>();
         for (String x: reserved) {
             this.reserved.add(x);
         }
@@ -25,15 +29,15 @@ public class User {
         }
     }
 
-    public String[] getReserved() {
-        String[] output = new String[reserved.size()];
-        int curr = 0;
-        for (String x: reserved) {
-            output[curr] = x;
-            curr++;
-        }
-        return output;
-    }
+    //public String[] getReserved() {
+    //    String[] output = new String[reserved.size()];
+    //    int curr = 0;
+    //    for (String x: reserved) {
+    //        output[curr] = x;
+    //        curr++;
+    //    }
+    //    return output;
+    //}
 
     public String getPassword() {
         return password;
@@ -44,15 +48,28 @@ public class User {
         return username;
     }
 
-    public String[] getCheckedOut() {
-        String[] output = new String[checkedOut.size()];
-        int curr = 0;
-        for (String x: checkedOut) {
-            output[curr] = x;
-            curr++;
+    public String getCheckedOut() {
+        String output = "X";
+        for (int i = 0; i < checkedOut.size(); i++) {
+            output += checkedOut.get(i) + "X";
+            Log.d("oupt", output);
         }
         return output;
     }
+
+    public Book[] cBooks() {
+        Book[] outBook = new Book[usrLib.size()];
+        for (int i = 0; i < usrLib.size(); i++) {
+            outBook[i] = usrLib.get(i);
+            Log.d("outBook:", outBook[i].getTitle());
+            Log.d("UsrLib:", usrLib.get(i).getTitle());
+        }
+        Log.d("POS", String.valueOf(outBook.length));
+        Log.d("POS", this.getUsername());
+        Resources.setUserBooks(outBook);
+        return outBook;
+    }
+
 
     public boolean[] has(Book book) {
         boolean[] output = {false, false}; // corresponds to having the book, and having it checked out (true) or reserved (false)
@@ -80,7 +97,7 @@ public class User {
             }
             else {
                 book.setReserved(true);
-                this.reserved.add(book.getCallNumber());
+                this.reserved.add(book);
                 return true;
             }
         }
@@ -97,6 +114,10 @@ public class User {
         }
     }
 
+    public void addToHolds(Book book) {
+        reserved.add(book);
+    }
+
     // will attempt to check a book out or return it... will return true if successful
     public boolean checkOut(Book book, boolean checkingOut) { // checkingOut = true if you want to check out... obvi
         if (checkingOut) {
@@ -106,7 +127,9 @@ public class User {
             }
             else {
                 book.setCheckedOut(true);
-                this.checkedOut.add(book.getCallNumber());
+                this.checkedOut.add(book);
+                this.usrLib.add(book);
+                Resources.setUserBooks(cBooks());
                 return true;
             }
         }

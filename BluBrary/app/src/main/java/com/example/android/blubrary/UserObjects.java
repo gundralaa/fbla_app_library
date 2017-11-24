@@ -12,11 +12,11 @@ public class UserObjects {
         String[] bb = {"GYWP2Z8YHBVMFS"};
         String[] c = {};
         String[] cc = {};
-        User[] output = {
-                new User(0,"saelanny", "actuallySaeli", a, aa),
-                new User(1,"test", "test", b, bb),
-                new User(2,"pomtree", "MMMMMMM", c, cc)
+        Book[] blanks = {};
+        return new User[]{
+                new User("saelanny", "actuallySaeli", a, aa, blanks),
+                new User("test", "test", b, bb, blanks),
+                new User("pomtree", "MMMMMMM", c, cc, blanks),
         };
-        return output;
     }
 }

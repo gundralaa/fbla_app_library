@@ -29,16 +29,17 @@ public class MainActivity extends AppCompatActivity
 
     public static Book[] library = Resources.library;
     public static Book[] currentLib;
-
-    public User pom = new User(0,"Tom", "1234", new String[0], new String[0]);
-    public User [] users = UserObjects.getUsers();
-    public User currentUser;
-    private RecyclerView mRecyclerView;
-    private BookListAdapter mBookListAdapter;
-    private EditText titleIn;
-    private EditText authorIn;
-    private EditText genreIn;
-    private Spinner sortBy;
+    //private static BookListAdapter mBookListAdapter;
+    public Book blanks[] = new Book[0];
+    public User pom = new User("Tom", "1234", new String[0], new String[0], blanks);
+    public User[] users = UserObjects.getUsers();
+    public static User currentUser;
+    public static RecyclerView mRecyclerView;
+    public static BookListAdapter mBookListAdapter;
+    public static EditText titleIn;
+    public static EditText authorIn;
+    public static EditText genreIn;
+    public Spinner sortBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycle_view_books);
-
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -73,10 +73,11 @@ public class MainActivity extends AppCompatActivity
         sortBy.setAdapter(sortDDAdpt);
         searchButton.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
+
                 if (titleIn.getVisibility() == View.VISIBLE) {
                     InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                    mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, currentUser);
                     mRecyclerView.setAdapter(mBookListAdapter);
                     titleIn.setVisibility(View.GONE);
                     authorIn.setVisibility(View.GONE);
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (sortBy.getSelectedItemPosition() == 0) library = Sort.sortByTitle(library);
                 else if (sortBy.getSelectedItemPosition() == 1) library = Sort.sortByAuth(library);
-                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, pom);
+                mBookListAdapter = new BookListAdapter(Search.search(library, titleIn.getText().toString(), authorIn.getText().toString(), genreIn.getText().toString()), MainActivity.this, currentUser);
                 mRecyclerView.setAdapter(mBookListAdapter);
 
             }
@@ -113,14 +114,14 @@ public class MainActivity extends AppCompatActivity
         if (startingIntent.hasExtra("User")) {
             String username = startingIntent.getStringExtra("User");
 
-            for (User user: users){
-                if (user.getUsername().equals(username)){
+            for (User user : users) {
+                if (user.getUsername().equals(username)) {
                     currentUser = user;
                 }
             }
 
         }
-
+            Resources.usr = currentUser;
     }
 
     @Override
@@ -162,9 +163,14 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_map) {
 
+            Intent startMapActivityIntent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(startMapActivityIntent);
+
         } else if (id == R.id.nav_virtual_map) {
 
         } else if (id == R.id.nav_sign_out) {
+            Intent signOutActivity = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(signOutActivity);
 
         } else if (id == R.id.nav_books) {
 
@@ -172,6 +178,11 @@ public class MainActivity extends AppCompatActivity
             String username = currentUser.getUsername();
             startBooksActivityIntent.putExtra("Username", username);
             startActivity(startBooksActivityIntent);
+
+        } else if (id == R.id.nav_barcode_scanner){
+
+            Intent startBarcodeActivityIntent = new Intent(MainActivity.this, BarcodeActivity.class);
+            startActivity(startBarcodeActivityIntent);
 
         }
 
@@ -190,10 +201,11 @@ public class MainActivity extends AppCompatActivity
         Class destinationActivity = BookDisplay.class;
 
         Intent startChildActivityIntent = new Intent(context, destinationActivity);
-
-        startChildActivityIntent.putExtra("BookPosition", position);
+        int help_me = Integer.parseInt(lib[position].getCallNumber()) - 1;
+        startChildActivityIntent.putExtra("BookPosition", help_me);
 
         startActivity(startChildActivityIntent);
 
     }
+
 }

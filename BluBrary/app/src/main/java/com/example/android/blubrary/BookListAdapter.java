@@ -16,15 +16,9 @@ import android.widget.TextView;
 
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookListViewHolder> {
 
+    private final BookListAdapterClickHandler mClickHandler;
     Book library[];
     User usr;
-
-
-    private final BookListAdapterClickHandler mClickHandler;
-
-    public interface BookListAdapterClickHandler {
-        void onClick(int position, Book lib []);
-    }
 
     public BookListAdapter(Book inLib[], BookListAdapterClickHandler clickHandler, User inusr) {
         mClickHandler = clickHandler;
@@ -43,21 +37,27 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
     }
 
     @Override
-    public void onBindViewHolder(BookListViewHolder holder, final int position) {
-        holder.hold.setOnClickListener((new View.OnClickListener() {
+    public void onBindViewHolder(final BookListViewHolder holder, final int position) {
+
+        holder.co.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("reserve clicked", library[position].getTitle());
-                //set reserved
-                usr.reserve(library[position], true);
+                //set checked out
+                usr.checkOut(library[position], true);
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+
+                holder.returnButton.setVisibility(View.VISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out, returning in ~ " + library[position].checkTim());
+
 
             }
         }));
-        holder.co.setOnClickListener((new View.OnClickListener() {
+        holder.hold.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("check out clicked", library[position].getTitle());
                 //set checked out
-                usr.checkOut(library[position], true);
-
+                usr.addToHolds(library[position]);
+                library[position].hold();
             }
         }));
 
@@ -66,29 +66,44 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             holder.mAuthorName.setText(library[position].getAuthor());
             String title = library[position].getTitle();
             if (title.length() > 31) {
-                holder.mBookTitle.setText((title.substring(0,30) + "..."));
+                holder.mBookTitle.setText((title.substring(0, 25) + "..."));
             } else {
                 holder.mBookTitle.setText(library[position].getTitle());
             }
-
-            if (library[position].isCheckedOut() || library[position].isReserved()) {
-                if (library[position].isReserved()) {
-                    holder.mBookAva.setText("Reserved");
-                }
-                else {
-                    holder.mBookAva.setText("Unavailable");
-                }
-
-                if (usr.has(library[position])[0]) {
-                    holder.mBookAva.setTextColor(Color.BLUE);
-                } else {
-                    holder.mBookAva.setTextColor(Color.RED);
-                }
-            }
-            else {
-                holder.mBookAva.setText("Available");
+            Log.d("Book " + library[position].getTitle(), String.valueOf(library[position].isCheckedOut()));
+            if (library[position].isCheckedOutToUser(Resources.usr)) {
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.returnButton.setVisibility(View.VISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Your expected to return this book in " + library[position].checkTim() + " days");
+            } else if (library[position].isHeldByUser(Resources.usr)) {
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.returnButton.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Will be avalible in " + library[position].checkTim() + " days for your checkout");
+            } else if (!library[position].isCheckedOutToUser(Resources.usr) && library[position].isCheckedOut()) {
+                holder.hold.setVisibility(View.VISIBLE);
+                holder.co.setVisibility(View.INVISIBLE);
+                holder.returnButton.setVisibility(View.INVISIBLE);
+                holder.mBookAva.setTextColor(Color.RED);
+                holder.mBookAva.setText("Checked out");
+            } else {
+                holder.hold.setVisibility(View.INVISIBLE);
+                holder.co.setVisibility(View.VISIBLE);
+                holder.returnButton.setVisibility((View.INVISIBLE));
                 holder.mBookAva.setTextColor(Color.GREEN);
+                holder.mBookAva.setText("Avalible in Library now");
+
             }
+
+        } else {
+            holder.hold.setVisibility(View.INVISIBLE);
+            holder.co.setVisibility(View.VISIBLE);
+            holder.mBookAva.setText("...E...");
+            holder.mBookAva.setTextColor(Color.GREEN);
+
 
         }
     }
@@ -99,6 +114,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         return library.length;
     }
 
+    public interface BookListAdapterClickHandler {
+        void onClick(int position, Book lib[]);
+    }
+
     class BookListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public final TextView mBookTitle;
@@ -106,6 +125,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
         public final TextView mBookAva;
         public final Button hold;
         public final Button co;
+        public final Button returnButton;
 
         public BookListViewHolder(View view) {
             super(view);
@@ -114,7 +134,8 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.BookLi
             mAuthorName = (TextView) view.findViewById(R.id.tv_book_author);
             hold = (Button) view.findViewById(R.id.button_reserve);
             co = (Button) view.findViewById(R.id.button_checkout);
-
+            returnButton = (Button) view.findViewById(R.id.button_return);
+            returnButton.setVisibility(View.INVISIBLE);
             view.setOnClickListener(this);
         }
 

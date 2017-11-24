@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.blubrary">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/Blues">
         <activity
+
+
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+
+            android:screenOrientation="portrait"
+
+            tools:replace="screenOrientation" />
+        <activity
+
             android:name=".EntryActivity"
+
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,11 +33,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".BookDisplay" />
+        <activity android:name=".MapActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".UserBooksActivity" />
+        <activity android:name=".BarcodeActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
+
     </application>
 
 </manifest>
