@@ -5,9 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- *
  * Created by saeli on 9/29/2017.
- *
  */
 
 public class User {
@@ -78,13 +76,11 @@ public class User {
             output[0] = true;
             output[1] = true;
             return output;
-        }
-        else if (reserved.contains(book.getCallNumber())) {
+        } else if (reserved.contains(book.getCallNumber())) {
             output[0] = true;
             output[1] = false;
             return output;
-        }
-        else {
+        } else {
             return output;
         }
     }
@@ -97,30 +93,41 @@ public class User {
             }
         }
     }
+
+    public void cancelHoldBook(Book book) {
+        for (int i = 0; i < checkedOut.size(); i++) {
+            if (reserved.get(i).equals(book)) {
+                reserved.remove(i);
+                break;
+            }
+        }
+    }
+
     // will attempt to reserve/unreserve a book for a user, will return true if successful, false if failed (book already reserved or unreserved)
     public boolean reserve(Book book, boolean reserving) { // if true, you are reserving, if false, you are unreserving
         if (reserving) {
             // if checked out or reserved, you can't reserve it
             if (book.isCheckedOut() || book.isReserved()) {
                 return false;
-            }
-            else {
+            } else {
                 book.setReserved(true);
                 this.reserved.add(book);
                 return true;
             }
-        }
-        else {
+        } else {
             // in order for a user to unreserve, they must have the book reserved.. there is some redundancy but it's ok
             if (book.isReserved() && this.reserved.contains(book.getCallNumber())) {
                 book.setReserved(false);
                 this.reserved.remove(book.getCallNumber());
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         }
+    }
+
+    public Book[] getUserHolds() {
+        return (Book[]) reserved.toArray();
     }
 
     public void addToHolds(Book book) {
@@ -133,23 +140,20 @@ public class User {
             // if book is checked out or is reserved not by you, then you can't check it out
             if (book.isCheckedOut() || (book.isReserved() && !(this.reserved.contains(book.getCallNumber())))) {
                 return false;
-            }
-            else {
+            } else {
                 book.setCheckedOut(true);
                 this.checkedOut.add(book);
                 this.usrLib.add(book);
                 Resources.setUserBooks(cBooks());
                 return true;
             }
-        }
-        else {
+        } else {
             // if book is checked out by you
             if (book.isCheckedOut() && this.checkedOut.contains(book.getCallNumber())) {
                 book.setCheckedOut(false);
                 this.checkedOut.remove(book.getCallNumber());
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
 

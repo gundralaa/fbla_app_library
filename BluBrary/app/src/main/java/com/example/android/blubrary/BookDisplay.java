@@ -55,23 +55,45 @@ public class BookDisplay extends AppCompatActivity {
             mGenreView.setText(("Genre(s): " + genre));
             mCallView.setText(("Call Number: " + book.getCallNumber()));
             mShelfView.setText(("Shelf # " + book.getShelfNumber()));
+            final User user = Resources.usr;
             if (book.isHeldByUser(Resources.usr)) {
-                action.setText("You've held this book already");
+                action.setText("Cancel Hold");
+                action.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        user.cancelHoldBook(book);
+
+                    }
+                });
 
             }
+
             Log.d("Filtering for buttons", "about to check isChecked out to uder");
+
             if (book.isCheckedOutToUser(Resources.usr)) {
                 action.setText("Return");
                 action.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Resources.usr.returnBook(book);
+                        user.returnBook(book);
                     }
                 });
             } else if (book.isCheckedOut()) {
                 action.setText("Hold");
+                action.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        user.addToHolds(book);
+                    }
+                });
             } else {
                 action.setText("Check out");
+                action.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        user.checkOut(book, true);
+                    }
+                });
             }
 
 
