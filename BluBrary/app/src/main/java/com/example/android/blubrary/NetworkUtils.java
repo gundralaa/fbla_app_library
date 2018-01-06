@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 public class NetworkUtils{
 
-    public static final String GET_BOOKS_URL = "http://ec2-54-193-6-253.us-west-1.compute.amazonaws.com/getAllBooks.php";
+    public static final String GET_BOOKS_URL = "http://ec2-184-169-219-251.us-west-1.compute.amazonaws.com/getAllBooks.php";
 
     public static URL makeUrls(String urlString) {
         URL url = null;
